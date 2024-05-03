@@ -3,7 +3,8 @@ include "koneksi.php";
 if (isset($_POST['save'])) {
     // mengambil data dari form
     $nama = $_POST["nama"];
-    $alamat = $_POST["alamat"];
+    $deskripsi = $_POST["deskripsi"];
+    $avg_price = $_POST["avg_price"];
     // mengambil data gambar seperti nama, ukuran, dan tipe
     $temp = $_FILES['gambar']['tmp_name'];
     $gambar = rand(0, 9999) . $_FILES['gambar']['name'];
@@ -15,7 +16,7 @@ if (isset($_POST['save'])) {
         // memindahkan gambar ke folder gambar
         move_uploaded_file($temp, "gambar/" . $gambar);
         // menambahkan data ke database
-        $query = mysqli_query($koneksi, "INSERT INTO user (`id`, `nama`, `alamat`, `gambar`) VALUES (NULL, '$nama', '$alamat', '$gambar')");
+        $query = mysqli_query($koneksi, "INSERT INTO hardware (`id`, `nama`, `deskripsi`, `avg_price`, `gambar`) VALUES (NULL, '$nama', '$deskripsi', '$avg_price', '$gambar')");
         if ($query) {
             // jika berhasil maka akan diarahkan ke halaman index.php
             header("location:index.php");
