@@ -27,8 +27,8 @@
             <div class="ultility d-flex justify-content-between flex-row-reverse m-3">
                 <a href="tambah.php" class="text-decoration-none"><button class="btn btn-primary">Tambah</button></a>
                 <form action="" method="get" class="input-group">
-                    <input type="text" name="cari" id="" placeholder="Cari data" class="input-group-text">
-                    <input type="submit" value="Cari" name="search" class="btn btn-secondary">
+                    <input type="text" name="cari" placeholder="Cari data" class="input-group-text">
+                    <input type="submit" value="Cari" name="cari" class="btn btn-secondary">
                 </form>
             </div>
             <table class="text-center table table-bordered table-hover table-responsive table-sm ">
@@ -57,7 +57,7 @@
                 <?php
                 // mengambil konfigurasi koneksi
                 include 'koneksi.php';
-                if (isset($_GET['search'])) {
+                if (isset($_GET['cari'])) {
                     $cari = $_GET['cari'];
                     $data = mysqli_query($koneksi, "SELECT * FROM hardware WHERE nama LIKE '%" . $cari . "%'");
                 } else {
