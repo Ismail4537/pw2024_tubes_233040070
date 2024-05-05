@@ -28,7 +28,7 @@
                 <a href="tambah.php" class="text-decoration-none"><button class="btn btn-primary">Tambah</button></a>
                 <form action="" method="get" class="input-group">
                     <input type="text" name="cari" placeholder="Cari data" class="input-group-text">
-                    <input type="submit" value="Cari" name="cari" class="btn btn-secondary">
+                    <input type="submit" value="Cari" name="search" class="btn btn-secondary">
                 </form>
             </div>
             <table class="text-center table table-bordered table-hover table-responsive table-sm ">
@@ -58,7 +58,7 @@
                 // mengambil konfigurasi koneksi
                 include 'koneksi.php';
                 // mengecek apakah ada data yang dicari
-                if (isset($_GET['cari'])) {
+                if (isset($_GET['search'])) {
                     $cari = $_GET['cari'];
                     $data = mysqli_query($koneksi, "SELECT * FROM hardware WHERE nama LIKE '%" . $cari . "%'");
                 } else {
