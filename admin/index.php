@@ -57,10 +57,12 @@
                 <?php
                 // mengambil konfigurasi koneksi
                 include 'koneksi.php';
+                // mengecek apakah ada data yang dicari
                 if (isset($_GET['cari'])) {
                     $cari = $_GET['cari'];
                     $data = mysqli_query($koneksi, "SELECT * FROM hardware WHERE nama LIKE '%" . $cari . "%'");
                 } else {
+                    // jika tidak ada data yang dicari
                     $data = mysqli_query($koneksi, "SELECT * FROM hardware");
                 }
                 // inisialisasi variabel no untuk urutan data
