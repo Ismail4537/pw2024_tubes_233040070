@@ -4,98 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="style/gambar/Tek.png">
-    <link rel="stylesheet" href="style/base.css">
-    <link rel="stylesheet" href="style/bootstrap.min.css">
-    <link rel="stylesheet" href="style/fontawesome-free/css/all.css">
-    <link rel="stylesheet" href="style/index.css">
-    <title>GaleryTek</title>
+    <link rel="stylesheet" href="crud/style/base.css">
+    <link rel="stylesheet" href="crud/style/form.css">
+    <link rel="stylesheet" href="crud/style/bootstrap.min.css">
+    <title>GaleryTek | Form Login</title>
 </head>
 
 <body>
-    <?php
-    include "nav.php";
-    ?>
-    <header class="border-bottom border-black border-5 d-flex align-content-center justify-content-center flex-column text-center" style="height: 100vh; color: black;">
-        <h4><img src="style/gambar/Tek.png" alt="Tek" width="100px"></h4>
-        <h1>GaleryTek</h1>
-        <br>
-        <p>GaleryTek adalah sebuah galery teknologi dimana berfungsi sebagai platform untuk menampilkan berbagai jenis Hardware komputer dalam bentuk gambar dengan deskripsinya</p>
-    </header>
-    <div class="main d-flex flex-column p-1">
-        <div class="data m-auto my-1">
-            <div class="ultility d-flex justify-content-between flex-row-reverse m-3">
-                <a href="tambah.php" class="text-decoration-none"><button class="btn btn-primary">Tambah</button></a>
-                <form action="" method="get" class="input-group">
-                    <input type="text" name="cari" placeholder="Cari data" class="input-group-text">
-                    <input type="submit" value="Cari" name="search" class="btn btn-secondary">
-                </form>
+    <?php include "crud/shortcut/nav_out.php"; ?>
+    <section class="main">
+        <form action="aksi_login.php" class="border rounded mx-5" method="post">
+            <h2 class="title rounded-top text-center text-white pb-2">Form Login</h2>
+            <div class="form d-flex m-2 flex-column">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Username/Email</span>
+                    <input type="text" name="user" class="form-control" placeholder="Username/email" aria-label="Username/email" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Password</span>
+                    <input type="password" name="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
+                </div>
+                <input type="submit" class="btn btn-primary mx-auto" value="Login" name="save">
             </div>
-            <table class="text-center table table-bordered table-hover table-responsive table-sm ">
-                <thead class="table-success">
-                    <tr>
-                        <th class="align-content-center" width="2%">#</th>
-                        <th class="align-content-center" width="20%">Gambar</th>
-                        <th class="align-content-center" width="10%">Nama</th>
-                        <th class="align-content-center" width="10%">Kategori</th>
-                        <th class="align-content-center">Deskripsi</th>
-                        <th class="align-content-center" width="15%">Harga rata-rata pasaran(IDR)</th>
-                        <th class="align-content-center" width="10%">Action</th>
-                    </tr>
-                </thead>
-                <tfoot class="table-success">
-                    <tr>
-                        <th class="align-content-center">#</th>
-                        <th class="align-content-center">Gambar</th>
-                        <th class="align-content-center">Nama</th>
-                        <th class="align-content-center">Kategori</th>
-                        <th class="align-content-center">Deskripsi</th>
-                        <th class="align-content-center">Harga rata-rata pasaran(IDR)</th>
-                        <th class="align-content-center">Aksi</th>
-                    </tr>
-                </tfoot>
-                <?php
-                // mengambil konfigurasi koneksi
-                include 'koneksi.php';
-                // mengecek apakah ada data yang dicari
-                if (isset($_GET['search'])) {
-                    $cari = $_GET['cari'];
-                    $data = mysqli_query($koneksi, "SELECT * FROM hardware WHERE nama LIKE '%" . $cari . "%'");
-                } else {
-                    // jika tidak ada data yang dicari
-                    $data = mysqli_query($koneksi, "SELECT * FROM hardware");
-                }
-                // inisialisasi variabel no untuk urutan data
-                $no = 1;
-                // menampilkan data dari database
-                while ($tampil = mysqli_fetch_array($data)) {
-                ?>
-                    <tr>
-                        <td class="align-content-center"><?php echo $no++; ?></td>
-                        <td class="align-content-center">
-                            <img src="gambar/<?php echo $tampil['gambar'] ?>" alt="<?php echo $tampil['gambar'] ?>">
-                        </td>
-                        <td class="align-content-center"><?php echo $tampil['nama']; ?></td>
-                        <td class="align-content-center"><?php echo $tampil['kategori']; ?></td>
-                        <td class="align-content-center"><?php echo $tampil['deskripsi']; ?></td>
-                        <td class="align-content-center">
-                            <p class="mx-2">Rp,<?php echo number_format($tampil['avg_price'], 0, '', '.'); ?>,00</p>
-                        </td>
-                        <td class="align-content-center">
-                            <div class="action d-flex flex-column">
-                                <a href="edit.php?id=<?php echo $tampil['id']; ?>" class="btn btn-success mb-1">Edit</a>
-                                <a href="hapus.php?id=<?php echo $tampil['id']; ?>" class="btn btn-danger" onclick="return confirm('Anda yakin mau menghapus item ini ?')">Hapus</a>
-                            </div>
-                        </td>
-                    </tr>
-                <?php
-                }
-                ?>
-            </table>
-        </div>
-    </div>
+        </form>
+        <center>
+            <a href="register.php">belum punya akun? Register disini</a>
+        </center>
+    </section>
     <?php
-    include "link.php";
+    include "crud/shortcut/link.php";
     ?>
 </body>
 
