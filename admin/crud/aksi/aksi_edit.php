@@ -23,6 +23,7 @@ if (isset($_POST['save'])) {
         $gambaru = rand(0, 9999) . $_FILES['gambaru']['name'];
         $size = $_FILES['gambaru']['size'];
         $type = $_FILES['gambaru']['type'];
+        return;
         if (($size <= 5000000) and ($type == 'image/jpeg' or $type == 'image/png')) {
             move_uploaded_file($temp, "../gambar/" . $gambaru);
             $query = mysqli_query($koneksi, "UPDATE `hardware` SET `nama` = '$nama', `kategori` = '$kategori', `deskripsi` = '$deskripsi', `avg_price` = '$avg_price', `gambar` = '$gambaru' WHERE `hardware`.`id` = $id");

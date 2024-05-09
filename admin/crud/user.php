@@ -15,18 +15,27 @@
 <body>
     <?php
     include "shortcut/nav.php";
-    include "shortcut/koneksi.php";
-    session_start();
-    if ($_SESSION['status'] != "login") {
-        header("location:../index.php?=belum_login");
-    }
-    $user = $_SESSION['user'];
-    $data = mysqli_query($koneksi, "SELECT * FROM user WHERE username='$user' or email='$user'");
-    $tampil = mysqli_fetch_array($data);
-    if ($tampil['gambar']) {
-        $gambar = $tampil['gambar'];
+    if (isset($_GET['id'])) {
+        $getId = $_GET['id'];
+        $query = mysqli_query($koneksi, "SELECT * FROM user WHERE id='$getId'");
+        while ($tampil = mysqli_fetch_assoc($query)) {
+            $username = $tampil['username'];
+            $password = $tampil['password'];
+            $email = $tampil['email'];
+            $role = $tampil['role'];
+            $userId = $tampil['id'];
+            if ($tampil['gambar']) {
+                $gambar_profile = $tampil['gambar'];
+            } else {
+                $gambar_profile = "Profile_picture.png";
+            }
+        }
     } else {
-        $gambar = "Profile_picture.png";
+        $username = $tampil_user['username'];
+        $password = $tampil_user['password'];
+        $email = $tampil_user['email'];
+        $role = $tampil_user['role'];
+        $userId = $tampil_user['id'];
     }
     ?>
     <section class="main mt-5" style="height: 100vh;">
@@ -35,24 +44,43 @@
             <div class="container d-flex">
                 <div class="d-inline-flex flex-column text-center p-2 me-3">
                     <h4>Gambar Profil</h4>
-                    <img class="mx-auto mb-2 mt-0 border rounded-circle" src="gambar_profile/<?= $gambar ?>" alt="style/gambar/Profile_picture.png" width="200px" height="200px">
+                    <img class="mx-auto mb-2 mt-0 border rounded-circle" src="gambar_profile/<?= $gambar_profile ?>" alt="style/gambar/Profile_picture.png" width="200px" height="200px">
                 </div>
                 <div class="main_form m-auto" style="width: 100%;">
                     <div class="input-group my-3">
                         <span class="input-group-text" id="addon-wrapping">Nama</span>
-                        <input type="text" value="<?= $tampil['username'] ?>" class="form-control" placeholder="Nama" aria-label="Nama" aria-describedby="addon-wrapping" readonly>
+                        <input type="text" value="<?= $username ?>" class="form-control" placeholder="Nama" aria-label="Nama" aria-describedby="addon-wrapping" readonly>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="addon-wrapping">Email</span>
-                        <input type="email" value="<?= $tampil['email'] ?>" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="addon-wrapping" readonly>
+                        <input type="email" value="<?= $email ?>" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="addon-wrapping" readonly>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="addon-wrapping">Role</span>
-                        <input type="Role" value="<?= $tampil['role'] ?>" class="form-control" placeholder="Role" aria-label="Role" aria-describedby="addon-wrapping" readonly>
+                        <input type="text" value="<?= $role ?>" class="form-control" placeholder="Role" aria-label="Role" aria-describedby="addon-wrapping" readonly>
                     </div>
-                    <div class="d-flex justify-content-between flex-row-reverse">
-                        <a href="edit_profile.php?id=<?= $tampil['id'] ?>" class="btn btn-primary">Edit Profil</a>
-                        <a href="aksi/hapus_profile.php?id=<?= $tampil['id'] ?>" class="btn btn-danger" onclick="return confirm('Anda yakin mau menghapus akun ini ?')">Hapus Profil</a>
+                    <?php
+                    if ($tampil_user['role'] == "super admin") {
+                        echo
+                        "
+                        <div class='input-group mb-3'>
+                        <span class='input-group-text' id='addon-wrapping'>Password(MD5)</span>
+                        <input type='text' value='" . $password . "' class='form-control' placeholder='Password' aria-label='Password' aria-describedby='addon-wrapping' readonly>
+                    </div>
+                        ";
+                    }
+                    ?>
+                    <div class="d-flex justify-content-between flex-row-reverse mb-2">
+                        <?php
+                        if ($role != "super admin" and $tampil_user['role'] != "admin") {
+                            if ($tampil_user['username'] == $username or $tampil_user["role"] == "super admin") {
+                                echo "<a href='form/edit_profile.php?id=" . $userId . "' class='btn btn-primary'>Edit Profil</a>";
+                            }
+                        }
+                        if ($tampil_user["role"] == "super admin" or $role != "super admin" or $tampil_user['username'] == $username) {
+                            echo "<a href='aksi/hapus_profile.php?id=" . $userId . "' class='btn btn-danger' onclick='return confirm(`Anda yakin mau menghapus akun ini ?`)'>Hapus Profil</a>";
+                        }
+                        ?>
                     </div>
                 </div>
             </div>

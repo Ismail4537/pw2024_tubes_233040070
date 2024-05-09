@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style/base.css">
     <link rel="stylesheet" href="style/bootstrap.min.css">
     <link rel="stylesheet" href="style/index.css">
-    <title>GaleryTek</title>
+    <title>GaleryTek | Data User</title>
     <style>
         /* * {
             border: 1px solid red;
@@ -19,15 +19,17 @@
 <body>
     <?php
     // mengambil konfigurasi koneksi
-    include 'shortcut/koneksi.php';
     include "shortcut/nav.php";
-    $button = "<a href='form/tambah.php' class='text-decoration-none btn btn-primary my-auto'>Tambah</a>";
-    $td1 = "<th class='align-content-center' width='10%'>Action</th>";
-    $td2 = "<th class='align-content-center'>Aksi</th>";
+    if ($_SESSION['status'] != "login") {
+        header("location:../index.php?=belum_login");
+    }
+    if ($tampil_user['role'] == "user") {
+        header("location:index.php?=anda_bukan_admin");
+    }
     ?>
     <header class="d-flex align-content-center justify-content-center flex-column text-center" style="height: 100vh; color: black;">
         <h4><img src="style/gambar/Tek.png" alt="Tek" width="100px"></h4>
-        <h1>GaleryTek</h1>
+        <h1>GaleryTek | Data Users</h1>
         <br>
         <p>GaleryTek adalah sebuah galery teknologi dimana berfungsi sebagai platform untuk menampilkan berbagai jenis Hardware komputer dalam bentuk gambar dengan deskripsinya</p>
     </header>
@@ -41,11 +43,6 @@
     <section class="main d-flex flex-column p-1" id="main">
         <div class="data m-auto my-1">
             <div class="ultility d-flex justify-content-between flex-row-reverse m-3">
-                <?php
-                if ($tampil_user['role'] == "admin" or $tampil_user['role'] == "super admin") {
-                    echo $button;
-                }
-                ?>
                 <form action="" method="get" class="input-group">
                     <input type="text" name="cari" placeholder="Cari data" class="input-group-text">
                     <input type="submit" value="Cari" name="search" class="btn btn-secondary">
@@ -55,72 +52,63 @@
                 <thead class="table-success">
                     <tr>
                         <th class="align-content-center" width="2%">#</th>
-                        <th class="align-content-center" width="20%">Gambar</th>
-                        <th class="align-content-center" width="10%">Nama</th>
-                        <th class="align-content-center" width="10%">Kategori</th>
-                        <th class="align-content-center">Deskripsi</th>
-                        <th class="align-content-center" width="15%">Harga rata-rata pasaran(IDR)</th>
-                        <?php
-                        if ($tampil_user['role'] == "admin" or $tampil_user['role'] == "super admin") {
-                            echo $td1;
-                        }
-                        ?>
+                        <th class="align-content-center" width="10%">Foto Profile</th>
+                        <th class="align-content-center" width="20%">Username</th>
+                        <th class="align-content-center">Email</th>
+                        <th class='align-content-center' width='10%'>Action</th>
 
                     </tr>
                 </thead>
                 <tfoot class="table-success">
                     <tr>
                         <th class="align-content-center">#</th>
-                        <th class="align-content-center">Gambar</th>
-                        <th class="align-content-center">Nama</th>
-                        <th class="align-content-center">Kategori</th>
-                        <th class="align-content-center">Deskripsi</th>
-                        <th class="align-content-center">Harga rata-rata pasaran(IDR)</th>
-                        <?php
-                        if ($tampil_user['role'] == "admin" or $tampil_user['role'] == "super admin") {
-                            echo $td2;
-                        }
-                        ?>
+                        <th class="align-content-center">Foto Profile</th>
+                        <th class="align-content-center">Username</th>
+                        <th class="align-content-center">Email</th>
+                        <th class='align-content-center'>Action</th>
                     </tr>
                 </tfoot>
                 <?php
                 // mengecek apakah ada data yang dicari
                 if (isset($_GET['search'])) {
                     $cari = $_GET['cari'];
-                    $data = mysqli_query($koneksi, "SELECT * FROM hardware WHERE nama LIKE '%" . $cari . "%'");
+                    $data = mysqli_query($koneksi, "SELECT * FROM user WHERE username LIKE '%" . $cari . "%' or email LIKE '%" . $cari . "%'");
                 } else {
                     // jika tidak ada data yang dicari
-                    $data = mysqli_query($koneksi, "SELECT * FROM hardware");
+                    $data = mysqli_query($koneksi, "SELECT * FROM user");
                 }
                 // inisialisasi variabel no untuk urutan data
                 $no = 1;
                 // menampilkan data dari database
                 while ($tampil = mysqli_fetch_array($data)) {
+                    if ($tampil['gambar']) {
+                        $gambar = $tampil['gambar'];
+                    } else {
+                        $gambar = "Profile_picture.png";
+                    }
                 ?>
                     <tr>
                         <th class="align-content-center" scope="row"><?= $no++; ?></th>
                         <td class="align-content-center">
-                            <img src="gambar/<?= $tampil['gambar'] ?>" alt="<?= $tampil['gambar'] ?>">
+                            <img class="rounded-circle" src="gambar_profile/<?= $gambar ?>" alt="<?= $gambar ?>">
                         </td>
-                        <td class="align-content-center"><?= $tampil['nama']; ?></td>
-                        <td class="align-content-center"><?= $tampil['kategori']; ?></td>
-                        <td class="align-content-center"><?= $tampil['deskripsi']; ?></td>
-                        <td class="align-content-center">
-                            <p class="mx-2">Rp,<?= number_format($tampil['avg_price'], 0, '', '.'); ?>,00</p>
-                        </td>
-                        <?php
-                        if ($tampil_user['role'] == "admin" or $tampil_user['role'] == "super admin") {
-                            echo
-                            "
-                            <td class='align-content-center'>
+                        <td class="align-content-center"><a href="user.php?id=<?= $tampil['id'] ?>"><?= $tampil['username']; ?></a><br><b><?= $tampil['role']; ?></b></td>
+                        <td class="align-content-center"><?= $tampil['email']; ?></td>
+                        <td class='align-content-center'>
                             <div class='action d-flex flex-column'>
-                                <a href='form/edit.php?id=" . $tampil['id'] . "' class='btn btn-success mb-1'>Edit</a>
-                                <a href='aksi/hapus.php?id=" . $tampil['id'] . "' class='btn btn-danger' onclick='return confirm(`Anda yakin mau menghapus item ini ?`)'>Hapus</a>
+                                <?php
+                                if ($tampil_user['role'] == "super admin") {
+                                    if ($tampil['role'] != "super admin" or $tampil['username'] == $tampil_user['username']) {
+                                        echo
+                                        "
+                                        <a href='form/edit_profile.php?id=" . $tampil['id'] . "' class='btn btn-success mb-1'>Edit</a>
+                                        ";
+                                    }
+                                }
+                                ?>
+                                <a href="aksi/hapus_profile.php?id=<?= $tampil['id'] ?>" class='btn btn-danger' onclick='return confirm(`Anda yakin mau menghapus item ini ?`)'>Hapus</a>
                             </div>
                         </td>
-                            ";
-                        }
-                        ?>
                     </tr>
                 <?php
                 }

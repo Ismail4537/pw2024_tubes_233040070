@@ -4,30 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="style/gambar/Tek.png">
-    <link rel="stylesheet" href="style/base.css">
-    <link rel="stylesheet" href="style/form.css">
-    <link rel="stylesheet" href="style/fontawesome-free/css/all.css">
-    <link rel="stylesheet" href="style/bootstrap.min.css">
+    <link rel="icon" href="../style/gambar/Tek.png">
+    <link rel="stylesheet" href="../style/base.css">
+    <link rel="stylesheet" href="../style/form.css">
+    <link rel="stylesheet" href="../style/fontawesome-free/css/all.css">
+    <link rel="stylesheet" href="../style/bootstrap.min.css">
     <title>GaleryTek | Form Edit</title>
 </head>
 
 <body>
     <?php
-    include "shortcut/nav.php";
-    session_start();
-    if ($_SESSION['status'] != "login") {
-        header("location:../index.php?=belum_login");
-    }
+    include "../shortcut/nav.php";
     ?>
     <section class="main">
         <?php
+        if (!$_GET["id"]) {
+            header("location:index.php?=id_kosong");
+            return;
+        }
         $id = $_GET["id"];
-        include "shortcut/koneksi.php";
         $query = mysqli_query($koneksi, "SELECT * FROM hardware WHERE id='$id'");
         while ($tampil = mysqli_fetch_array($query)) {
         ?>
-            <form action="aksi/aksi_edit.php" method="post" enctype="multipart/form-data" class="d-flex flex-column border rounded text-center mx-5">
+            <form action="../aksi/aksi_edit.php" method="post" enctype="multipart/form-data" class="d-flex flex-column border rounded text-center mx-5">
                 <h2 class="title rounded-top text-white p-1">Form Edit Data</h2>
                 <?php
                 if (isset($_SESSION['gagal'])) {
@@ -39,14 +38,14 @@
                 <div class="aha d-flex m-2" style="width:auto;">
                     <div class="border d-inline-flex flex-column text-center p-2 justify-content-center">
                         <h4>Gambar lama</h4>
-                        <img class="mx-auto mb-2 mt-0" src="gambar/<?php echo $tampil['gambar'] ?>" alt="<?php echo $tampil['gambar'] ?>">
+                        <img class="mx-auto mb-2 mt-0" src="../gambar/<?php echo $tampil['gambar'] ?>" alt="<?php echo $tampil['gambar'] ?>">
                         <p>Kategori : <?php echo $tampil['kategori']; ?>
                         </p>
                     </div>
                     <div class="text-start ms-2" style="width:100%;">
                         <span>Nama</span>
                         <div class="mb-2">
-                            <input name="nama" value="<?php echo $tampil['nama']; ?>" type="text" class="form-control" placeholder="Nama" aria-label="Nama" aria-describedby="addon-wrapping">
+                            <input name="nama" value="<?php echo $tampil['nama']; ?>" type="text" class="form-control" placeholder="Nama" aria-label="Nama" aria-describedby="addon-wrapping" required>
                         </div>
                         <div class="mb-2">
                             <select name="kategori" class="form-select" aria-label="Default select example">
@@ -68,7 +67,7 @@
                         </div>
                         <span>Harga rata-rata(IDR)</span>
                         <div class="mb-2">
-                            <input name="avg_price" value="<?php echo $tampil['avg_price']; ?>" type="number" class="form-control" placeholder="Harga rata-rata pasaran(IDR)" aria-describedby="addon-wrapping">
+                            <input name="avg_price" value="<?php echo $tampil['avg_price']; ?>" type="number" class="form-control" placeholder="Harga rata-rata pasaran(IDR)" aria-describedby="addon-wrapping" required>
                         </div>
                         <label>Gambar Baru</label>
                         <div class="input-group mb-2">
@@ -86,7 +85,7 @@
         <?php } ?>
     </section>
     <?php
-    include "shortcut/link.php";
+    include "../shortcut/link.php";
     ?>
 </body>
 

@@ -1,7 +1,17 @@
 <?php
 include "../shortcut/koneksi.php";
+session_start();
+$user = $_SESSION['user'];
+$query_user = mysqli_query($koneksi, "SELECT role FROM user WHERE username='$user'");
+$tampil = mysqli_fetch_assoc($query_user);
 // mengambil id dari url
 if (isset($_GET['id'])) {
+    // cek apakah user adalah admin
+    if ($tampil['role'] == "user") {
+        // jika bukan admin maka akan diarahkan ke halaman index.php
+        header("location:../index.php?=anda_bukan_admin");
+        return;
+    }
     $id = $_GET["id"];
     // mengambil gambar dari database
     $query = mysqli_query($koneksi, "SELECT gambar FROM hardware WHERE `id`='$id';");

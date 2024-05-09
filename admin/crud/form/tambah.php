@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="style/gambar/Tek.png">
-    <link rel="stylesheet" href="style/base.css">
-    <link rel="stylesheet" href="style/form.css">
-    <link rel="stylesheet" href="style/fontawesome-free/css/all.css">
-    <link rel="stylesheet" href="style/bootstrap.min.css">
+    <link rel="icon" href="../style/gambar/Tek.png">
+    <link rel="stylesheet" href="../style/base.css">
+    <link rel="stylesheet" href="../style/form.css">
+    <link rel="stylesheet" href="../style/fontawesome-free/css/all.css">
+    <link rel="stylesheet" href="../style/bootstrap.min.css">
     <title>GaleryTek | Form Tambah</title>
     <style>
     </style>
@@ -16,14 +16,10 @@
 
 <body>
     <?php
-    include "shortcut/nav.php";
-    session_start();
-    if ($_SESSION['status'] != "login") {
-        header("location:../index.php?=belum_login");
-    }
+    include "../shortcut/nav.php";
     ?>
     <section class="main">
-        <form action="aksi/aksi_tambah.php" method="post" enctype="multipart/form-data" class="d-flex flex-column border rounded text-center mx-5">
+        <form action="../aksi/aksi_tambah.php" method="post" enctype="multipart/form-data" class="d-flex flex-column border rounded text-center mx-5">
             <h2 class="title rounded-top text-white p-1">Form Tambah Data</h2>
             <?php
             if (isset($_SESSION['gagal'])) {
@@ -34,7 +30,7 @@
             <div class="p-2">
                 <div class="input-group flex-nowrap p-2">
                     <span class="input-group-text" id="addon-wrapping">Nama</span>
-                    <input name="nama" type="text" class="form-control" placeholder="Nama" aria-label="Nama" aria-describedby="addon-wrapping">
+                    <input name="nama" type="text" class="form-control" placeholder="Nama" aria-label="Nama" aria-describedby="addon-wrapping" required>
                     <select name="kategori" class="form-select" aria-label="Default select example">
                         <option selected>Kategori</option>
                         <option value="ram">RAM</option>
@@ -54,18 +50,18 @@
                 </div>
                 <div class="input-group flex-nowrap p-2">
                     <span class="input-group-text" id="addon-wrapping">Harga rata-rata pasaran(IDR)</span>
-                    <input name="avg_price" type="number" class="form-control" placeholder="Harga rata-rata pasaran(IDR)" aria-label="Harga rata-rata pasaran(IDR)" aria-describedby="addon-wrapping">
+                    <input name="avg_price" type="number" class="form-control" placeholder="Harga rata-rata pasaran(IDR)" aria-label="Harga rata-rata pasaran(IDR)" aria-describedby="addon-wrapping" required>
                 </div>
                 <div class="input-group p-2">
                     <label class="input-group-text" for="gambar">Gambar</label>
-                    <input name="gambar" type="file" class="form-control" id="gambar">
+                    <input name="gambar" type="file" class="form-control" id="gambar" required>
                 </div>
             </div>
             <input type="submit" value="Tambah" name="save" class="btn btn-primary mx-5 mb-3 rounded-pill">
         </form>
     </section>
     <?php
-    include "shortcut/link.php";
+    include "../shortcut/link.php";
     ?>
 </body>
 
