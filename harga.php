@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="../assets/style/gambar/Tek.png">
-    <link rel="stylesheet" href="../assets/style/base.css">
-    <link rel="stylesheet" href="../assets/style/bootstrap.min.css">
+    <link rel="icon" href="assets/style/gambar/Tek.png">
+    <link rel="stylesheet" href="assets/style/base.css">
+    <link rel="stylesheet" href="assets/style/bootstrap.min.css">
     <link rel="stylesheet" href="http://localhost/pw2024_tubes_233040070/admin/assets/plugins/fontawesome-free-6.5.2-web/css/all.css">
-    <link rel="stylesheet" href="../assets/style/index.css">
+    <link rel="stylesheet" href="assets/style/index.css">
     <title>GaleryTek</title>
     <!-- <style>
         * {
@@ -20,25 +20,17 @@
 <body>
     <?php
     // mengambil konfigurasi koneksi
-    include "../assets/shortcut/nav.php";
+    include "assets/shortcut/nav_out.php";
     ?>
     <header class="d-flex align-content-center justify-content-center flex-column text-center" style="height: 100vh; color: black;">
-        <h4><img src="../assets/style/gambar/Tek.png" alt="Tek" width="100px"></h4>
+        <h4><img src="assets/style/gambar/Tek.png" alt="Tek" width="100px"></h4>
         <h1>GaleryTek</h1>
         <br>
         <p>GaleryTek adalah sebuah galery teknologi dimana berfungsi sebagai platform untuk menampilkan berbagai jenis Hardware komputer dalam bentuk gambar dengan deskripsinya</p>
     </header>
-    <marquee behavior="" direction="left" class="bg-dark text-white">
-        Selamat datang,
-        <b class="text-capitalize">
-            <?= $tampil_user['role']; ?>
-        </b>
-        <?= $tampil_user['username']; ?>
-    </marquee>
     <section class="main d-flex flex-column p-1" id="main">
         <div class="data m-auto">
-            <div class="ultility d-flex justify-content-between m-3 flex-row-reverse">
-                <a href='form/tambah_harga.php' class='text-decoration-none btn btn-primary my-auto'>Tambah</a>
+            <div class="ultility d-flex justify-content-between m-3">
                 <div class="d-flex mx-2" role="search">
                     <input class="form-control me-2" class="cari" type="text" placeholder="Search" name="cari" id="cari" aria-label="Search">
                     <i class='fa-solid fa-magnifying-glass my-auto'></i>
@@ -51,7 +43,6 @@
                         <th class="align-content-center" width="10%">Hardware</th>
                         <th class="align-content-center" width="10%">Harga rata-rata</th>
                         <th class="align-content-center" width="10%">Tanggal Rekap</th>
-                        <th class='align-content-center' width='10%'>Aksi</th>
                     </tr>
                 </thead>
                 <tfoot class="table-success">
@@ -60,7 +51,6 @@
                         <th class="align-content-center">Hardware</th>
                         <th class="align-content-center">Harga rata-rata</th>
                         <th class="align-content-center">Tanggal Rekap</th>
-                        <th class='align-content-center'>Aksi</th>
                     </tr>
                 </tfoot>
                 <?php
@@ -80,12 +70,6 @@
                             <p class="mx-2">Rp,<?= number_format($tampil['avg_price'], 0, '', '.'); ?>,00</p>
                         </td>
                         <td class="align-content-center"><?= date_format($date, "Y/M/d l"); ?></td>
-                        <td class='align-content-center'>
-                            <div class='action d-flex flex-column'>
-                                <a href='form/edit_harga.php?id=<?= $tampil['id_harga'] ?>' class='btn btn-success mb-1'>Edit</a>
-                                <a href='aksi/hapus.php?id_harga=<?= $tampil['id_harga'] ?>' class='btn btn-danger' onclick='return confirm(`Anda yakin mau menghapus item ini ?`)'>Hapus</a>
-                            </div>
-                        </td>
                     </tr>
                 <?php
                 }
@@ -94,7 +78,7 @@
         </div>
     </section>
     <?php
-    include "../assets/shortcut/link.php";
+    include "assets/shortcut/link.php";
     ?>
     <script>
         $(document).ready(function() {
@@ -104,7 +88,7 @@
                 // alert(data);
                 $.ajax({
                     method: 'POST',
-                    url: 'data_harga.php',
+                    url: 'data/data_harga.php',
                     data: data,
                     success: function(result) {
                         $(".tableku").html(result);

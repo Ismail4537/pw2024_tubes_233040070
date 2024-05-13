@@ -1,5 +1,5 @@
 <?php
-include "../assets/shortcut/koneksi.php";
+include "../../assets/shortcut/koneksi.php";
 ?>
 <table class="text-center table table-bordered table-hover table-responsive table-sm tableku">
     <thead class="table-success">
@@ -39,7 +39,7 @@ include "../assets/shortcut/koneksi.php";
         <tr>
             <th class="align-content-center" scope="row"><?= $no++; ?></th>
             <td class="align-content-center">
-                <img src="http://localhost/pw2024_tubes_233040070/admin/crud/recource/gambar/<?= $tampil['gambar'] ?>" alt="<?= $tampil['gambar'] ?>">
+                <img src="crud/recource/gambar/<?= $tampil['gambar'] ?>" alt="<?= $tampil['gambar'] ?>">
             </td>
             <td class="align-content-center"><?= $tampil['nama']; ?></td>
             <td class="align-content-center"><?= $tampil['kategori']; ?></td>

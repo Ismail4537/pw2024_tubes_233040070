@@ -1,5 +1,5 @@
 <?php
-include "../../assets/shortcut/koneksi.php";
+include "../../../assets/shortcut/koneksi.php";
 if (isset($_POST['hardware'])) {
     $id = $_POST["id"];
     $nama = $_POST["nama"];
@@ -8,7 +8,7 @@ if (isset($_POST['hardware'])) {
     // cek apakah user ingin mengubah gambar
     if (isset($_POST['upt'])) {
         // hapus gambar lama
-        $query = mysqli_query($koneksi, "SELECT gambar FROM hardware WHERE id='$id';");
+        $query = mysqli_query($koneksi, "SELECT gambar FROM hardware WHERE id_hardware='$id';");
         $data = mysqli_fetch_array($query);
         $gambar = $data['gambar'];
         if (file_exists("../recource/gambar/" . $gambar)) {
@@ -21,9 +21,9 @@ if (isset($_POST['hardware'])) {
         $type = $_FILES['gambaru']['type'];
         if (($size <= 5000000) and ($type == 'image/jpeg' or $type == 'image/png')) {
             move_uploaded_file($temp, "../recource/gambar/" . $gambaru);
-            $query = mysqli_query($koneksi, "UPDATE `hardware` SET `nama` = '$nama', `kategori` = '$kategori', `deskripsi` = '$deskripsi', `gambar` = '$gambaru' WHERE `hardware`.`id` = $id");
+            $query = mysqli_query($koneksi, "UPDATE `hardware` SET `nama` = '$nama', `kategori` = '$kategori', `deskripsi` = '$deskripsi', `gambar` = '$gambaru' WHERE `hardware`.`id_hardware` = $id");
             if ($query) {
-                header("location:../hardware.php#main");
+                header("location:../../hardware.php#main");
                 unset($_POST['hardware']);
                 unset($_POST['upt']);
             } else {
@@ -45,7 +45,7 @@ if (isset($_POST['hardware'])) {
     } else {
         $query = mysqli_query($koneksi, "UPDATE `hardware` SET `nama` = '$nama', `kategori` = '$kategori', `deskripsi` = '$deskripsi' WHERE `hardware`.`id_hardware` = $id");
         if ($query) {
-            header("location:../hardware.php#main");
+            header("location:../../hardware.php#main");
         } else {
             session_start();
             $_SESSION['gagal'] = "Gagal mengedit data";
@@ -66,7 +66,7 @@ if (isset($_POST['hardware'])) {
     }
     $query = mysqli_query($koneksi, "UPDATE `harga` SET `id_hardware` = '$id_hardware', `avg_price` = '$avg_price', `tanggal` = '$tanggal' WHERE `harga`.`id_harga` = $id");
     if ($query) {
-        header("location:../harga.php#main");
+        header("location:../../harga.php#main");
         unset($_POST['harga']);
     } else {
         session_start();

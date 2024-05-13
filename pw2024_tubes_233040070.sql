@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 13, 2024 at 02:45 AM
+-- Generation Time: May 13, 2024 at 01:20 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db`
+-- Database: `pw2024_tubes_233040070`
 --
 
 -- --------------------------------------------------------
@@ -41,8 +41,7 @@ CREATE TABLE `hardware` (
 
 INSERT INTO `hardware` (`id_hardware`, `nama`, `kategori`, `deskripsi`, `gambar`) VALUES
 (29, 'sad', 'vga', 'asdads', '6590Elmanuk.png'),
-(32, 'test', 'keyboard', 'sdasdasd', '1953Tek.png'),
-(33, 'aaaa', 'power suply', 'sadsda', '4283Char.png');
+(32, 'test', 'keyboard', 'sdasdasd', '1953Tek.png');
 
 -- --------------------------------------------------------
 
@@ -63,7 +62,7 @@ CREATE TABLE `harga` (
 
 INSERT INTO `harga` (`id_harga`, `id_hardware`, `avg_price`, `tanggal`) VALUES
 (7, 32, 65454564, '2024-05-14'),
-(8, 33, 6345434, '2024-05-12');
+(8, 29, 6345434, '2024-05-12');
 
 -- --------------------------------------------------------
 
@@ -85,9 +84,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `email`, `password`, `role`, `gambar`) VALUES
-(10, 'Ismail457', 'horispararoh457@gmail.com', '42a3b65b67c1f0bea6c484e675e0d80e', 'super admin', '3423Elmanuk.png'),
-(11, 'dasa', 'test@gmail.com', '3a08fe7b8c4da6ed09f21c3ef97efce2', 'admin', ''),
-(13, 'gol', 'a@gmail.com', '0b5de470bdace90bd6cfb2541eb79f99', 'super admin', '1690Char.png');
+(10, 'Ismail459', 'horispararoh457@gmail.com', '61ec623bc1f72d9e7bf72dea46abf5fb', 'super admin', '4443Tek.png'),
+(11, 'dasa', 'test@gmail.com', '3a08fe7b8c4da6ed09f21c3ef97efce2', 'admin', '');
 
 --
 -- Indexes for dumped tables
@@ -126,7 +124,7 @@ ALTER TABLE `hardware`
 -- AUTO_INCREMENT for table `harga`
 --
 ALTER TABLE `harga`
-  MODIFY `id_harga` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_harga` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `user`

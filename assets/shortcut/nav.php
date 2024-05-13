@@ -33,8 +33,8 @@ if ($tampil_user['gambar']) {
                         Tabel
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="http://localhost/pw2024_tubes_233040070/admin/crud/index.php">Tabel Harga</a></li>
-                        <li><a class="dropdown-item" href="http://localhost/pw2024_tubes_233040070/admin/crud/hardware.php">Tabel Hardware</a></li>
+                        <li><a class="dropdown-item" href="http://localhost/pw2024_tubes_233040070/admin/harga.php">Tabel Harga</a></li>
+                        <li><a class="dropdown-item" href="http://localhost/pw2024_tubes_233040070/admin/hardware.php">Tabel Hardware</a></li>
                         <?php
                         if ($tampil_user['role'] == "super admin") {
                             echo
@@ -42,7 +42,7 @@ if ($tampil_user['gambar']) {
                     <li>
                             <hr class='dropdown-divider'>
                         </li>
-                        <li><a class='dropdown-item' href='http://localhost/pw2024_tubes_233040070/admin/crud/users.php'>Tabel user</a></li>
+                        <li><a class='dropdown-item' href='http://localhost/pw2024_tubes_233040070/admin/users.php'>Tabel user</a></li>
                     ";
                         }
                         ?>
@@ -50,7 +50,7 @@ if ($tampil_user['gambar']) {
                 </li>
             </ul>
             <div class="d-flex justify-content-evenly">
-                <a href="http://localhost/pw2024_tubes_233040070/admin/crud/user.php" class="d-flex btn btn-sm btn-primary justify-content-center me-2">
+                <a href="http://localhost/pw2024_tubes_233040070/admin/user.php" class="d-flex btn btn-sm btn-primary justify-content-center me-2">
                     <div class="fs-5 me-2"><?= $tampil_user['username'] ?></div><img class="rounded-circle" src="http://localhost/pw2024_tubes_233040070/admin/crud/recource/gambar_profile/<?= $gambar_profile; ?>" alt="Profile_picture.png" style="height:30px; width: 30px;">
                 </a>
                 <a href="http://localhost/pw2024_tubes_233040070/admin/crud/aksi/logout.php" class="d-flex btn btn-sm btn-danger justify-content-center" onclick="return confirm('Anda yakin ingin logout ?')">

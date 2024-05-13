@@ -7,9 +7,9 @@
     <link rel="icon" href="../assets/style/gambar/Tek.png">
     <link rel="stylesheet" href="../assets/style/base.css">
     <link rel="stylesheet" href="../assets/style/bootstrap.min.css">
-    <link rel="stylesheet" href="http://localhost/pw2024_tubes_233040070/admin/assets/plugins/fontawesome-free-6.5.2-web/css/all.css">
+    <link rel="stylesheet" href="../assets/plugins/fontawesome-free-6.5.2-web/css/all.css">
     <link rel="stylesheet" href="../assets/style/index.css">
-    <title>GaleryTek</title>
+    <title>GaleryTek | Data User</title>
     <!-- <style>
         * {
             border: 1px solid red;
@@ -21,10 +21,13 @@
     <?php
     // mengambil konfigurasi koneksi
     include "../assets/shortcut/nav.php";
+    if ($tampil_user['role'] != "super admin") {
+        header("location:index.php?=anda_bukan_super_admin");
+    }
     ?>
     <header class="d-flex align-content-center justify-content-center flex-column text-center" style="height: 100vh; color: black;">
         <h4><img src="../assets/style/gambar/Tek.png" alt="Tek" width="100px"></h4>
-        <h1>GaleryTek</h1>
+        <h1>GaleryTek | Data Users</h1>
         <br>
         <p>GaleryTek adalah sebuah galery teknologi dimana berfungsi sebagai platform untuk menampilkan berbagai jenis Hardware komputer dalam bentuk gambar dengan deskripsinya</p>
     </header>
@@ -36,10 +39,9 @@
         <?= $tampil_user['username']; ?>
     </marquee>
     <section class="main d-flex flex-column p-1" id="main">
-        <div class="data m-auto">
-            <div class="ultility d-flex justify-content-between m-3 flex-row-reverse">
-                <a href='form/tambah_hardware.php' class='text-decoration-none btn btn-primary my-auto'>Tambah</a>
-                <div class="d-flex mx-2" role="search">
+        <div class="data m-auto my-1">
+            <div class="ultility d-flex justify-content-between m-3">
+                <div class="d-flex" role="search">
                     <input class="form-control me-2" class="cari" type="text" placeholder="Search" name="cari" id="cari" aria-label="Search">
                     <i class='fa-solid fa-magnifying-glass my-auto'></i>
                 </div>
@@ -48,49 +50,47 @@
                 <thead class="table-success">
                     <tr>
                         <th class="align-content-center" width="2%">#</th>
-                        <th class="align-content-center" width="20%">Gambar</th>
-                        <th class="align-content-center" width="10%">Nama</th>
-                        <th class="align-content-center" width="10%">Kategori</th>
-                        <th class="align-content-center">Deskripsi</th>
-                        <th class='align-content-center' width='10%'>Aksi</th>
+                        <th class="align-content-center" width="10%">Foto Profile</th>
+                        <th class="align-content-center" width="20%">Username</th>
+                        <th class="align-content-center">Email</th>
+                        <th class='align-content-center' width='10%'>Action</th>
+
                     </tr>
                 </thead>
                 <tfoot class="table-success">
                     <tr>
                         <th class="align-content-center">#</th>
-                        <th class="align-content-center">Gambar</th>
-                        <th class="align-content-center">Nama</th>
-                        <th class="align-content-center">Kategori</th>
-                        <th class="align-content-center">Deskripsi</th>
-                        <th class='align-content-center'>Aksi</th>
+                        <th class="align-content-center">Foto Profile</th>
+                        <th class="align-content-center">Username</th>
+                        <th class="align-content-center">Email</th>
+                        <th class='align-content-center'>Action</th>
                     </tr>
                 </tfoot>
                 <?php
-                // mengecek apakah ada data yang dicari
-                if (isset($_GET['id'])) {
-                    $id = $_GET['id'];
-                    $data = mysqli_query($koneksi, "SELECT * FROM hardware WHERE id_hardware =" . $id);
-                } else {
-                    // jika tidak ada data yang dicari
-                    $data = mysqli_query($koneksi, "SELECT * FROM hardware");
-                }
+                $data = mysqli_query($koneksi, "SELECT * FROM user");
                 // inisialisasi variabel no untuk urutan data
                 $no = 1;
                 // menampilkan data dari database
                 while ($tampil = mysqli_fetch_array($data)) {
+                    // mengecek apakah ada gambar
+                    if ($tampil['gambar']) {
+                        $gambar = $tampil['gambar'];
+                    } else {
+                        // jika tidak ada gambar
+                        $gambar = "Profile_picture.png";
+                    }
                 ?>
                     <tr>
                         <th class="align-content-center" scope="row"><?= $no++; ?></th>
                         <td class="align-content-center">
-                            <img src="http://localhost/pw2024_tubes_233040070/admin/crud/recource/gambar/<?= $tampil['gambar'] ?>" alt="<?= $tampil['gambar'] ?>">
+                            <img class="rounded-circle" src="crud/recource/gambar_profile/<?= $gambar ?>" alt="<?= $gambar ?>">
                         </td>
-                        <td class="align-content-center"><?= $tampil['nama']; ?></td>
-                        <td class="align-content-center"><?= $tampil['kategori']; ?></td>
-                        <td class="align-content-center"><?= $tampil['deskripsi']; ?></td>
+                        <td class="align-content-center"><a href="user.php?id=<?= $tampil['id'] ?>"><?= $tampil['username']; ?></a><br><b><?= $tampil['role']; ?></b></td>
+                        <td class="align-content-center"><?= $tampil['email']; ?></td>
                         <td class='align-content-center'>
                             <div class='action d-flex flex-column'>
-                                <a href='form/edit_hardware.php?id=<?= $tampil['id_hardware'] ?>' class='btn btn-success mb-1'>Edit</a>
-                                <a href='aksi/hapus.php?id_hardware=<?= $tampil['id_hardware'] ?>' class='btn btn-danger' onclick='return confirm(`Anda yakin mau menghapus item ini ?`)'>Hapus</a>
+                                <a href='crud/form/edit_profile.php?id=<?= $tampil['id'] ?>' class='btn btn-success mb-1'>Edit</a>
+                                <a href="crud/aksi/hapus_profile.php?id=<?= $tampil['id'] ?>" class='btn btn-danger' onclick='return confirm(`Anda yakin mau menghapus item ini ?`)'>Hapus</a>
                             </div>
                         </td>
                     </tr>
@@ -105,13 +105,13 @@
     ?>
     <script>
         $(document).ready(function() {
-            $(" body").on("change keyup keydown", "#cari", function() {
+            $("body").on("change keyup keydown", "#cari", function() {
                 var cari = $(this).val();
                 var data = "cari=" + cari;
                 // alert(data);
                 $.ajax({
                     method: 'POST',
-                    url: 'data_hardware.php',
+                    url: 'crud/data_users.php',
                     data: data,
                     success: function(result) {
                         $(".tableku").html(result);

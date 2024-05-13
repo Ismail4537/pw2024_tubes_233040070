@@ -4,17 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="../../assets/style/gambar/Tek.png">
-    <link rel="stylesheet" href="../../assets/style/base.css">
-    <link rel="stylesheet" href="../../assets/style/form.css">
-    <link rel="stylesheet" href="http://localhost/pw2024_tubes_233040070/admin/assets/plugins/fontawesome-free-6.5.2-web/css/all.css">
-    <link rel="stylesheet" href="../../assets/style/bootstrap.min.css">
+    <link rel="icon" href="../../../assets/style/gambar/Tek.png">
+    <link rel="stylesheet" href="../../../assets/style/base.css">
+    <link rel="stylesheet" href="../../../assets/style/form.css">
+    <link rel="stylesheet" href="../../../assets/plugins/fontawesome-free-6.5.2-web/css/all.css">
+    <link rel="stylesheet" href="../../../assets/style/bootstrap.min.css">
     <title>GaleryTek | Form Edit Profile</title>
 </head>
 
 <body>
     <?php
-    include "../../assets/shortcut/nav.php";
+    include "../../../assets/shortcut/nav.php";
     ?>
     <section class="main" style="height:100%;">
         <?php
@@ -40,24 +40,24 @@
                     unset($_SESSION['gagal']);
                 }
                 ?>
-                <input type="text" name="id" value="<?php echo $tampil["id"]; ?>" hidden readonly>
+                <input type="text" name="id" value="<?= $tampil["id"]; ?>" hidden readonly>
                 <div class="aha d-flex m-2" style="width:auto;">
                     <div class="border d-inline-flex flex-column text-center p-2 justify-content-center">
                         <h4>Gambar lama</h4>
-                        <img class="mx-auto mb-2 mt-0" src="<?php echo "http://localhost/pw2024_tubes_233040070/admin/crud/recource/gambar_profile/" . $gambar ?>" alt="<?php if ($tampil['gambar']) {
-                                                                                                                                                                            echo $tampil['gambar'];
-                                                                                                                                                                        } else {
-                                                                                                                                                                            echo "Tidak_ada_gambar";
-                                                                                                                                                                        } ?>">
+                        <img class="mx-auto mb-2 mt-0" src="<?= "../recource/gambar_profile/" . $gambar ?>" alt="<?php if ($tampil['gambar']) {
+                                                                                                                        echo $tampil['gambar'];
+                                                                                                                    } else {
+                                                                                                                        echo "Tidak_ada_gambar";
+                                                                                                                    } ?>">
                     </div>
                     <div class="text-start ms-2" style="width:100%;">
                         <span>Username</span>
                         <div class="mb-2">
-                            <input name="username" value="<?php echo $tampil['username']; ?>" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" required>
+                            <input name="username" value="<?= $tampil['username']; ?>" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" required>
                         </div>
                         <span>Email</span>
                         <div class="mb-2">
-                            <input name="email" value="<?php echo $tampil['email']; ?>" type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="addon-wrapping" required>
+                            <input name="email" value="<?= $tampil['email']; ?>" type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="addon-wrapping" required>
                         </div>
                         <label>Gambar Baru</label>
                         <div class="input-group mb-2">
@@ -104,7 +104,7 @@
         <?php } ?>
     </section>
     <?php
-    include "../../assets/shortcut/link.php";
+    include "../../../assets/shortcut/link.php";
     ?>
 </body>
 

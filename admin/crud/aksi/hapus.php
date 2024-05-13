@@ -1,5 +1,5 @@
 <?php
-include "../../assets/shortcut/koneksi.php";
+include "../../../assets/shortcut/koneksi.php";
 session_start();
 $user = $_SESSION['user'];
 $query_user = mysqli_query($koneksi, "SELECT role FROM user WHERE username='$user'");
@@ -8,7 +8,7 @@ $tampil = mysqli_fetch_assoc($query_user);
 if (isset($_GET['id_hardware'])) {
     // cek apakah user adalah admin
     if ($_SESSION['status'] != "login") {
-        header("location:../index.php?=belum_login");
+        header("location:../../../index.php?=belum_login");
         return;
     }
     $id = $_GET["id_hardware"];
@@ -23,20 +23,20 @@ if (isset($_GET['id_hardware'])) {
     $query = mysqli_query($koneksi, "DELETE FROM hardware WHERE `id_hardware`='$id';");
     if ($query) {
         // jika berhasil maka akan diarahkan ke halaman index.php
-        header("location:../index.php#main");
+        header("location:../../hardware.php#main");
     } else {
         echo "Gagal menghapus data";
     }
 } else if (isset($_GET['id_harga'])) {
     if ($_SESSION['status'] != "login") {
-        header("location:../index.php?=belum_login");
+        header("location:../../../index.php?=belum_login");
         return;
     }
     $id = $_GET["id_harga"];
     $query = mysqli_query($koneksi, "DELETE FROM harga WHERE `id_harga`='$id';");
     if ($query) {
         // jika berhasil maka akan diarahkan ke halaman harga.php
-        header("location:../harga.php#main");
+        header("location:../../harga.php#main");
     } else {
         echo "Gagal menghapus data";
     }

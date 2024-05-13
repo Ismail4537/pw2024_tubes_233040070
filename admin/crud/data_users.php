@@ -1,5 +1,5 @@
 <?php
-include "../assets/shortcut/koneksi.php";
+include "../../assets/shortcut/koneksi.php";
 ?>
 <table class="text-center table table-bordered table-hover table-responsive table-sm tableku">
     <thead class="table-success">
@@ -43,14 +43,14 @@ include "../assets/shortcut/koneksi.php";
         <tr>
             <th class="align-content-center" scope="row"><?= $no++; ?></th>
             <td class="align-content-center">
-                <img class="rounded-circle" src="recource/gambar_profile/<?= $gambar ?>" alt="<?= $gambar ?>">
+                <img class="rounded-circle" src="crud/recource/gambar_profile/<?= $gambar ?>" alt="<?= $gambar ?>">
             </td>
             <td class="align-content-center"><a href="user.php?id=<?= $tampil['id'] ?>"><?= $tampil['username']; ?></a><br><b><?= $tampil['role']; ?></b></td>
             <td class="align-content-center"><?= $tampil['email']; ?></td>
             <td class='align-content-center'>
                 <div class='action d-flex flex-column'>
-                    <a href='form/edit_profile.php?id=<?= $tampil['id'] ?>' class='btn btn-success mb-1'>Edit</a>
-                    <a href="aksi/hapus_profile.php?id=<?= $tampil['id'] ?>" class='btn btn-danger' onclick='return confirm(`Anda yakin mau menghapus item ini ?`)'>Hapus</a>
+                    <a href='crud/form/edit_profile.php?id=<?= $tampil['id'] ?>' class='btn btn-success mb-1'>Edit</a>
+                    <a href="crud/aksi/hapus_profile.php?id=<?= $tampil['id'] ?>" class='btn btn-danger' onclick='return confirm(`Anda yakin mau menghapus item ini ?`)'>Hapus</a>
                 </div>
             </td>
         </tr>

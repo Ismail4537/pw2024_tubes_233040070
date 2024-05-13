@@ -1,5 +1,5 @@
 <?php
-include "../../assets/shortcut/koneksi.php";
+include "../../../assets/shortcut/koneksi.php";
 if (isset($_POST['hardware'])) {
     // mengambil data dari form
     $nama = $_POST["nama"];
@@ -19,7 +19,7 @@ if (isset($_POST['hardware'])) {
         $query = mysqli_query($koneksi, "INSERT INTO hardware (`id_hardware`, `nama`, `kategori`, `deskripsi`, `gambar`) VALUES (NULL, '$nama', '$kategori', '$deskripsi', '$gambar')");
         if ($query) {
             // jika berhasil maka akan diarahkan ke halaman hardware.php
-            header("location:../hardware.php#main");
+            header("location:../../hardware.php#main");
             unset($_POST['hardware']);
         } else {
             // jika gagal maka akan diarahkan ke halaman tambah.php
@@ -52,7 +52,7 @@ if (isset($_POST['hardware'])) {
     $query = mysqli_query($koneksi, "INSERT INTO harga (`id_harga`, `id_hardware`, `avg_price`, `tanggal`) VALUES (NULL, '$id_hardware', '$avg_price', '$tanggal')");
     if ($query) {
         // jika berhasil maka akan diarahkan ke halaman harga.php
-        header("location:../harga.php#main");
+        header("location:../../harga.php#main");
         unset($_POST['harga']);
     } else {
         // jika gagal maka akan diarahkan ke halaman tambah.php

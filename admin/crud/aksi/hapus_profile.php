@@ -1,12 +1,12 @@
 <?php
-include "../../assets/shortcut/koneksi.php";
+include "../../../assets/shortcut/koneksi.php";
 session_start();
 // cek siapa yang sedang login
 $current = $_SESSION['user'];
 $query_current = mysqli_query($koneksi, "SELECT * FROM user WHERE username='$current'");
 $data_current = mysqli_fetch_array($query_current);
 if ($_SESSION['status'] != "login") {
-    header("location:../index.php?=belum_login");
+    header("location:../../../index.php?=belum_login");
 }
 
 // mengambil id dari url
@@ -18,7 +18,7 @@ if (isset($_GET['id'])) {
     if ($data_current['role'] == "admin") {
         if ($data_current['username'] != $data_user['username']) {
             // jika bukan super admin maka akan diarahkan ke halaman index.php
-            header("location:../index.php?=anda_bukan_super_admin");
+            header("location:../../index.php?=anda_bukan_super_admin");
             return;
         }
     }
@@ -37,10 +37,10 @@ if (isset($_GET['id'])) {
         // jika user yang dihapus adalah user yang sedang login maka akan diarahkan ke halaman login
         session_start();
         session_destroy();
-        header("location:../../index.php");
+        header("location:../../../index.php");
     } else {
         // jika user yang dihapus bukan user yang sedang login maka akan diarahkan ke halaman users.php
-        header("location:../users.php#main");
+        header("location:../../users.php#main");
     }
 } else {
     // jika mencoba mengakses halaman ini tanpa melalui tombol hapus

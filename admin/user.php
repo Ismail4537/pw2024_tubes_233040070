@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../assets/style/base.css">
     <link rel="stylesheet" href="../assets/style/profile.css">
     <link rel="stylesheet" href="../assets/style/fontawesome-free/css/all.css">
-    <link rel="stylesheet" href="http://localhost/pw2024_tubes_233040070/admin/assets/plugins/fontawesome-free-6.5.2-web/css/all.css">
+    <link rel="stylesheet" href="../assets/plugins/fontawesome-free-6.5.2-web/css/all.css">
     <link rel="stylesheet" href="../assets/style/bootstrap.min.css">
     <title>GaleryTek | Profile</title>
 </head>
@@ -45,7 +45,7 @@
             <div class="container d-flex">
                 <div class="d-inline-flex flex-column text-center p-2 me-3">
                     <h4>Gambar Profil</h4>
-                    <img class="mx-auto mb-2 mt-0 border rounded-circle" src="recource/gambar_profile/<?= $gambar_profile ?>" alt="../assets/style/gambar/Profile_picture.png" width="200px" height="200px">
+                    <img class="mx-auto mb-2 mt-0 border rounded-circle" src="crud/recource/gambar_profile/<?= $gambar_profile ?>" alt="../assets/style/gambar/Profile_picture.png" width="200px" height="200px">
                 </div>
                 <div class="main_form m-auto" style="width: 100%;">
                     <div class="input-group my-3">
@@ -74,10 +74,10 @@
                     <div class="d-flex justify-content-between flex-row-reverse mb-2">
                         <?php
                         if ($tampil_user['username'] == $username or $tampil_user["role"] == "super admin") {
-                            echo "<a href='form/edit_profile.php?id=" . $userId . "' class='btn btn-primary'>Edit Profil</a>";
+                            echo "<a href='crud/form/edit_profile.php?id=" . $userId . "' class='btn btn-primary'>Edit Profil</a>";
                         }
                         if ($tampil_user['username'] == $username or $tampil_user["role"] == "super admin") {
-                            echo "<a href='aksi/hapus_profile.php?id=" . $userId . "' class='btn btn-danger' onclick='return confirm(`Anda yakin mau menghapus akun ini ?`)'>Hapus Profil</a>";
+                            echo "<a href='crud/aksi/hapus_profile.php?id=" . $userId . "' class='btn btn-danger' onclick='return confirm(`Anda yakin mau menghapus akun ini ?`)'>Hapus Profil</a>";
                         }
                         ?>
                     </div>

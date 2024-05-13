@@ -1,5 +1,5 @@
 <?php
-include "../../assets/shortcut/koneksi.php";
+include "../../../assets/shortcut/koneksi.php";
 session_start();
 // cek siapa yang sedang login
 $current = $_SESSION['user'];
@@ -49,7 +49,7 @@ if (isset($_POST['save'])) {
         if (!preg_match("/^[a-zA-Z0-9]*$/", $password)) {
             session_start();
             $_SESSION['gagal'] = "Password tidak valid";
-            header("location:..//edit_profile.php?id=$id");
+            header("location:../form/edit_profile.php?id=$id");
         }
         // enkripsi password
         $password = md5($_POST["password"]);
@@ -157,16 +157,16 @@ if (isset($_POST['save'])) {
                 if ($data_current['username'] == $username) {
                     session_start();
                     $_SESSION['user'] = $username;
-                    header("location:../user.php");
+                    header("location:../../user.php");
                 } else {
                     // jika username pengedit dan username yang di edit sama akan diarahkan ke halaman user.php
                     if ($data_current['username'] == $data['username']) {
                         session_start();
                         $_SESSION['user'] = $username;
-                        header("location:../user.php");
+                        header("location:../../user.php");
                     } else {
                         // jika username pengedit dan username yang di edit tidak sama akan diarahkan ke halaman users.php
-                        header("location:../users.php#main");
+                        header("location:../../users.php#main");
                     }
                 }
             } else {
@@ -187,14 +187,14 @@ if (isset($_POST['save'])) {
             if ($data_current['username'] == $username) {
                 session_start();
                 $_SESSION['user'] = $username;
-                header("location:../user.php");
+                header("location:../../user.php");
             } else {
                 if ($data_current['username'] == $data['username']) {
                     session_start();
                     $_SESSION['user'] = $username;
-                    header("location:../user.php");
+                    header("location:../../user.php");
                 } else {
-                    header("location:../users.php#main");
+                    header("location:../../users.php#main");
                 }
             }
         } else {
