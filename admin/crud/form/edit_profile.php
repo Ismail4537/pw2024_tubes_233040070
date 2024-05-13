@@ -4,24 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="../style/gambar/Tek.png">
-    <link rel="stylesheet" href="../style/base.css">
-    <link rel="stylesheet" href="../style/form.css">
-    <link rel="stylesheet" href="../style/fontawesome-free/css/all.css">
-    <link rel="stylesheet" href="../style/bootstrap.min.css">
-    <title>GaleryTek | Form Edit</title>
+    <link rel="icon" href="../../assets/style/gambar/Tek.png">
+    <link rel="stylesheet" href="../../assets/style/base.css">
+    <link rel="stylesheet" href="../../assets/style/form.css">
+    <link rel="stylesheet" href="http://localhost/pw2024_tubes_233040070/admin/assets/plugins/fontawesome-free-6.5.2-web/css/all.css">
+    <link rel="stylesheet" href="../../assets/style/bootstrap.min.css">
+    <title>GaleryTek | Form Edit Profile</title>
 </head>
 
 <body>
     <?php
-    include "../shortcut/nav.php";
+    include "../../assets/shortcut/nav.php";
     ?>
     <section class="main" style="height:100%;">
         <?php
         $id = $_GET["id"];
-        include "../shortcut/koneksi.php";
         $query = mysqli_query($koneksi, "SELECT * FROM user WHERE id='$id'");
         while ($tampil = mysqli_fetch_array($query)) {
+            if ($tampil_user['role'] == "admin") {
+                if ($tampil_user['username'] != $tampil['username']) {
+                    header("location:index.php?=anda_bukan_super_admin");
+                }
+            }
             if ($tampil['gambar']) {
                 $gambar = $tampil['gambar'];
             } else {
@@ -29,7 +33,7 @@
             }
         ?>
             <form action="../aksi/aksi_edit_profile.php" method="post" enctype="multipart/form-data" class="d-flex flex-column border rounded text-center mx-5">
-                <h2 class="title rounded-top text-white p-1">Form Edit Data</h2>
+                <h2 class="title rounded-top text-white p-1">Form Edit Profile</h2>
                 <?php
                 if (isset($_SESSION['gagal'])) {
                     echo "<div class='alert alert-danger m-auto' role='alert'>" . $_SESSION['gagal'] . "</div>";
@@ -40,11 +44,11 @@
                 <div class="aha d-flex m-2" style="width:auto;">
                     <div class="border d-inline-flex flex-column text-center p-2 justify-content-center">
                         <h4>Gambar lama</h4>
-                        <img class="mx-auto mb-2 mt-0" src="<?php echo "../gambar_profile/" . $gambar ?>" alt="<?php if ($tampil['gambar']) {
-                                                                                                                    echo $tampil['gambar'];
-                                                                                                                } else {
-                                                                                                                    echo "Tidak_ada_gambar";
-                                                                                                                } ?>">
+                        <img class="mx-auto mb-2 mt-0" src="<?php echo "http://localhost/pw2024_tubes_233040070/admin/crud/recource/gambar_profile/" . $gambar ?>" alt="<?php if ($tampil['gambar']) {
+                                                                                                                                                                            echo $tampil['gambar'];
+                                                                                                                                                                        } else {
+                                                                                                                                                                            echo "Tidak_ada_gambar";
+                                                                                                                                                                        } ?>">
                     </div>
                     <div class="text-start ms-2" style="width:100%;">
                         <span>Username</span>
@@ -82,14 +86,15 @@
                         <div class='mb-2'>
                             <select name='roleNew' class='form-select' aria-label='Default select example'>
                                 <option selected value='" . $tampil["role"] . "'>" . $tampil["role"] . "</option>
-                                <option value='user'>user</option>
                                 <option value='admin'>admin</option>
                                 <option value='super admin'>super admin</option>
                             </select>
                         </div>
                             ";
                         }
+
                         ?>
+
                         <div class="d-grid">
                             <input type="submit" value="Edit" name="save" class="btn btn-primary mx-5 mb-3 rounded-pill">
                         </div>
@@ -99,7 +104,7 @@
         <?php } ?>
     </section>
     <?php
-    include "../shortcut/link.php";
+    include "../../assets/shortcut/link.php";
     ?>
 </body>
 

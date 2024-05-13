@@ -1,20 +1,20 @@
 <?php
-include "../shortcut/koneksi.php";
+include "../../assets/shortcut/koneksi.php";
 session_start();
 // cek siapa yang sedang login
 $current = $_SESSION['user'];
 $query_current = mysqli_query($koneksi, "SELECT * FROM user WHERE username='$current'");
-$tampil_current = mysqli_fetch_assoc($query_current);
+$data_current = mysqli_fetch_assoc($query_current);
 
 if (isset($_POST['save'])) {
     $id = $_POST["id"];
     // ambil data user
     $query = mysqli_query($koneksi, "SELECT * FROM user WHERE id='$id'");
-    $tampil = mysqli_fetch_array($query);
+    $data = mysqli_fetch_array($query);
     // ambil password user
-    $passwordOri = $tampil['password'];
+    $passwordOri = $data['password'];
     // ambil role user
-    $roleOri = $tampil['role'];
+    $roleOri = $data['role'];
     $username = $_POST["username"];
     $email = $_POST["email"];
     $password = $_POST["password"];
@@ -75,54 +75,59 @@ if (isset($_POST['save'])) {
     }
     // cek apakah username, email atau password sudah digunakan
     $query_user = mysqli_query($koneksi, "SELECT * FROM user WHERE username='$username' OR email='$email'");
-    $tampil_user = mysqli_fetch_assoc($query_user);
+    $data_user = mysqli_fetch_assoc($query_user);
     $query_password = mysqli_query($koneksi, "SELECT password FROM user WHERE password='$password'");
-    $tampil_password = mysqli_fetch_assoc($query_password);
+    $data_password = mysqli_fetch_assoc($query_password);
     // cek apakah username atau email lain terdeteksi
-    if (isset($tampil_user['username']) or isset($tampil_user['email'])) {
-        // cek apakah username yang terdeteksi adalah username yang sedang diinput
-        if ($tampil_user['username'] == $username) {
-            // jika username yang terdeteksi adalah username yang sedang diinput maka 
-            // akan di cek apakah username yang sedang diinput adalah username yang sedang login
-            if ($tampil_current['username'] != $tampil_user['username']) {
+    if (isset($data_user['username']) or isset($data_user['email'])) {
+        // cek apakah username dan email yang diedit tidak sama dengan username dan email yang di input
+        if ($data['username'] != $username) {
+            // cek apakah username sudah digunakan
+            if ($data_user['username'] == $username) {
                 session_start();
                 $_SESSION['gagal'] = "Username sudah digunakan";
                 header("location:../form/edit_profile.php?id=$id");
                 // echo "current user :<br>";
-                // echo $tampil_current['username'];
+                // echo $data_current['username'];
                 // echo "<br>other user :<br>";
-                // echo $tampil_user['username'];
+                // echo $data_user['username'];
+                // echo "<br>edited user :<br>";
+                // echo $data['username'];
                 // echo "<br>inputted text :<br>";
                 // echo $username;
                 return;
+                // jika username adalah username baru maka lanjut ke cek email
             }
-            // jika username adalah username baru maka lanjut ke cek email
         }
-        if ($tampil_user['email'] == $email) {
-            if ($tampil_current['email'] != $tampil_user['email']) {
+        if ($data['email'] != $email) {
+            if ($data_user['email'] == $email) {
                 session_start();
                 $_SESSION['gagal'] = "Email sudah digunakan";
                 header("location:../form/edit_profile.php?id=$id");
                 // echo "current user :<br>";
-                // echo $tampil_current['email'];
+                // echo $data_current['email'];
                 // echo "<br>other user :<br>";
-                // echo $tampil_user['email'];
+                // echo $data_user['email'];
+                // echo "<br>edited user :<br>";
+                // echo $datar['email'];
                 // echo "<br>inputted text :<br>";
                 // echo $email;
                 return;
             }
         }
     }
-    if (isset($tampil_password['password'])) {
-        if ($tampil_password['password'] == $password) {
-            if ($tampil_current['password'] != $tampil_password['password']) {
+    if (isset($data_password['password'])) {
+        if ($data['password'] != $password) {
+            if ($data_password['password'] == $password) {
                 session_start();
                 $_SESSION['gagal'] = "Password sudah digunakan";
                 header("location:../form/edit_profile.php?id=$id");
                 // echo "current user :<br>";
-                // echo $tampil_current['password'];
+                // echo $data_current['password'];
                 // echo "<br>other user :<br>";
-                // echo $tampil_password['password'];
+                // echo $data_password['password'];
+                // echo "<br>edited user :<br>";
+                // echo $data['password'];
                 // echo "<br>inputted text :<br>";
                 // echo $password;
                 return;
@@ -136,24 +141,26 @@ if (isset($_POST['save'])) {
         $query = mysqli_query($koneksi, "SELECT gambar FROM user WHERE id='$id';");
         $data = mysqli_fetch_array($query);
         $gambar = $data['gambar'];
-        unlink("../gambar_profile/" . $gambar);
+        if (file_exists("../recource/gambar_profile/" . $gambar)) {
+            unlink("../recource/gambar_profile/" . $gambar);
+        }
         // tambah gambar baru & edit data
         $temp = $_FILES['gambaru']['tmp_name'];
         $gambaru = rand(0, 9999) . $_FILES['gambaru']['name'];
         $size = $_FILES['gambaru']['size'];
         $type = $_FILES['gambaru']['type'];
         if (($size <= 5000000) and ($type == 'image/jpeg' or $type == 'image/png')) {
-            move_uploaded_file($temp, "../gambar_profile/" . $gambaru);
+            move_uploaded_file($temp, "../recource/gambar_profile/" . $gambaru);
             $query = mysqli_query($koneksi, "UPDATE `user` SET `username` = '$username', `email` = '$email', `password` = '$password', `role` = '$role', `gambar` = '$gambaru' WHERE `user`.`id` = $id");
             if ($query) {
                 // jika username pengedit dan username input sama akan diarahkan ke halaman user.php
-                if ($tampil_current['username'] == $username) {
+                if ($data_current['username'] == $username) {
                     session_start();
                     $_SESSION['user'] = $username;
                     header("location:../user.php");
                 } else {
                     // jika username pengedit dan username yang di edit sama akan diarahkan ke halaman user.php
-                    if ($tampil_current['username'] == $tampil['username']) {
+                    if ($data_current['username'] == $data['username']) {
                         session_start();
                         $_SESSION['user'] = $username;
                         header("location:../user.php");
@@ -177,12 +184,12 @@ if (isset($_POST['save'])) {
     } else {
         $query = mysqli_query($koneksi, "UPDATE `user` SET `username` = '$username', `email` = '$email', `password` = '$password', `role` = '$role' WHERE `user`.`id` = $id");
         if ($query) {
-            if ($tampil_current['username'] == $username) {
+            if ($data_current['username'] == $username) {
                 session_start();
                 $_SESSION['user'] = $username;
                 header("location:../user.php");
             } else {
-                if ($tampil_current['username'] == $tampil['username']) {
+                if ($data_current['username'] == $data['username']) {
                     session_start();
                     $_SESSION['user'] = $username;
                     header("location:../user.php");

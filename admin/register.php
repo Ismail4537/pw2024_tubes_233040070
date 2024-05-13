@@ -4,14 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="crud/style/base.css">
-    <link rel="stylesheet" href="crud/style/form.css">
-    <link rel="stylesheet" href="crud/style/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/style/base.css">
+    <link rel="stylesheet" href="assets/style/form.css">
+    <link rel="stylesheet" href="assets/style/bootstrap.min.css">
+    <link rel="stylesheet" href="http://localhost/pw2024_tubes_233040070/admin/assets/plugins/fontawesome-free-6.5.2-web/css/all.css">
     <title>GaleryTek | Form Register</title>
 </head>
 
 <body>
-    <?php include "crud/shortcut/nav_out.php"; ?>
+    <?php include "assets/shortcut/nav_out.php"; ?>
     <section class="main">
         <form action="aksi_register.php" class="border rounded mx-5" method="post">
             <h2 class="title rounded-top text-center text-white pb-2">Form Register</h2>
@@ -36,11 +37,11 @@
             </div>
         </form>
         <center>
-            <a href="./">sudah punya akun? Login disini</a>
+            <a href="login.php">sudah punya akun? Login disini</a>
         </center>
     </section>
     <?php
-    include "crud/shortcut/link.php";
+    include "assets/shortcut/link.php";
     ?>
 </body>
 

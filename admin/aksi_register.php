@@ -1,5 +1,5 @@
 <?php
-include "crud/shortcut/koneksi.php";
+include "assets/shortcut/koneksi.php";
 if (isset($_POST["save"])) {
     $username = $_POST["username"];
     $email = $_POST["email"];

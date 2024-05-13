@@ -4,31 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="style/gambar/Tek.png">
-    <link rel="stylesheet" href="style/base.css">
-    <link rel="stylesheet" href="style/bootstrap.min.css">
-    <link rel="stylesheet" href="style/index.css">
+    <link rel="icon" href="../assets/style/gambar/Tek.png">
+    <link rel="stylesheet" href="../assets/style/base.css">
+    <link rel="stylesheet" href="../assets/style/bootstrap.min.css">
+    <link rel="stylesheet" href="http://localhost/pw2024_tubes_233040070/admin/assets/plugins/fontawesome-free-6.5.2-web/css/all.css">
+    <link rel="stylesheet" href="../assets/style/index.css">
     <title>GaleryTek | Data User</title>
-    <style>
-        /* * {
+    <!-- <style>
+        * {
             border: 1px solid red;
-        } */
-    </style>
+        }
+    </style> -->
 </head>
 
 <body>
     <?php
     // mengambil konfigurasi koneksi
-    include "shortcut/nav.php";
-    if ($_SESSION['status'] != "login") {
-        header("location:../index.php?=belum_login");
-    }
-    if ($tampil_user['role'] == "user") {
-        header("location:index.php?=anda_bukan_admin");
+    include "../assets/shortcut/nav.php";
+    if ($tampil_user['role'] == "admin") {
+        header("location:index.php?=anda_bukan_super_admin");
     }
     ?>
     <header class="d-flex align-content-center justify-content-center flex-column text-center" style="height: 100vh; color: black;">
-        <h4><img src="style/gambar/Tek.png" alt="Tek" width="100px"></h4>
+        <h4><img src="../assets/style/gambar/Tek.png" alt="Tek" width="100px"></h4>
         <h1>GaleryTek | Data Users</h1>
         <br>
         <p>GaleryTek adalah sebuah galery teknologi dimana berfungsi sebagai platform untuk menampilkan berbagai jenis Hardware komputer dalam bentuk gambar dengan deskripsinya</p>
@@ -43,12 +41,12 @@
     <section class="main d-flex flex-column p-1" id="main">
         <div class="data m-auto my-1">
             <div class="ultility d-flex justify-content-between flex-row-reverse m-3">
-                <form action="" method="get" class="input-group">
-                    <input type="text" name="cari" placeholder="Cari data" class="input-group-text">
-                    <input type="submit" value="Cari" name="search" class="btn btn-secondary">
-                </form>
+                <div class="d-flex" role="search">
+                    <input class="form-control me-2" class="cari" type="text" placeholder="Search" name="cari" id="cari" aria-label="Search">
+                    <i class='fa-solid fa-magnifying-glass my-auto'></i>
+                </div>
             </div>
-            <table class="text-center table table-bordered table-hover table-responsive table-sm ">
+            <table class="text-center table table-bordered table-hover table-responsive table-sm tableku">
                 <thead class="table-success">
                     <tr>
                         <th class="align-content-center" width="2%">#</th>
@@ -70,8 +68,8 @@
                 </tfoot>
                 <?php
                 // mengecek apakah ada data yang dicari
-                if (isset($_GET['search'])) {
-                    $cari = $_GET['cari'];
+                if (isset($_POST['cari'])) {
+                    $cari = $_POST['cari'];
                     $data = mysqli_query($koneksi, "SELECT * FROM user WHERE username LIKE '%" . $cari . "%' or email LIKE '%" . $cari . "%'");
                 } else {
                     // jika tidak ada data yang dicari
@@ -90,22 +88,13 @@
                     <tr>
                         <th class="align-content-center" scope="row"><?= $no++; ?></th>
                         <td class="align-content-center">
-                            <img class="rounded-circle" src="gambar_profile/<?= $gambar ?>" alt="<?= $gambar ?>">
+                            <img class="rounded-circle" src="recource/gambar_profile/<?= $gambar ?>" alt="<?= $gambar ?>">
                         </td>
                         <td class="align-content-center"><a href="user.php?id=<?= $tampil['id'] ?>"><?= $tampil['username']; ?></a><br><b><?= $tampil['role']; ?></b></td>
                         <td class="align-content-center"><?= $tampil['email']; ?></td>
                         <td class='align-content-center'>
                             <div class='action d-flex flex-column'>
-                                <?php
-                                if ($tampil_user['role'] == "super admin") {
-                                    if ($tampil['role'] != "super admin" or $tampil['username'] == $tampil_user['username']) {
-                                        echo
-                                        "
-                                        <a href='form/edit_profile.php?id=" . $tampil['id'] . "' class='btn btn-success mb-1'>Edit</a>
-                                        ";
-                                    }
-                                }
-                                ?>
+                                <a href='form/edit_profile.php?id=<?= $tampil['id'] ?>' class='btn btn-success mb-1'>Edit</a>
                                 <a href="aksi/hapus_profile.php?id=<?= $tampil['id'] ?>" class='btn btn-danger' onclick='return confirm(`Anda yakin mau menghapus item ini ?`)'>Hapus</a>
                             </div>
                         </td>
@@ -117,8 +106,25 @@
         </div>
     </section>
     <?php
-    include "shortcut/link.php";
+    include "../assets/shortcut/link.php";
     ?>
+    <script>
+        $(document).ready(function() {
+            $("body").on("change keyup keydown", "#cari", function() {
+                var cari = $(this).val();
+                var data = "cari=" + cari;
+                // alert(data);
+                $.ajax({
+                    method: 'POST',
+                    url: 'data_users.php',
+                    data: data,
+                    success: function(result) {
+                        $(".tableku").html(result);
+                    }
+                })
+            })
+        });
+    </script>
 </body>
 
 </html>
