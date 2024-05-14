@@ -13,8 +13,6 @@
 
 <body>
     <?php include "assets/shortcut/nav_out.php"; ?>
-    <!-- Super admin -->
-    <!-- ps : badak135478 -->
     <section class="main">
         <form action="aksi/aksi_login.php" class="border rounded mx-5" method="post">
             <h2 class="title rounded-top text-center text-white pb-2">Form Login</h2>
