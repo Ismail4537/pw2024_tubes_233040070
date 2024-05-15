@@ -1,5 +1,5 @@
 <?php
-include "../assets/shortcut/koneksi.php";
+include "../assets/function/function.php";
 ?>
 <table class="text-center table table-bordered table-hover table-responsive table-sm tableku">
     <thead class="table-success">
@@ -24,10 +24,10 @@ include "../assets/shortcut/koneksi.php";
     // mengecek apakah ada data yang dicari
     if (isset($_POST['cari'])) {
         $cari = $_POST['cari'];
-        $data = mysqli_query($koneksi, "SELECT * FROM hardware WHERE nama LIKE '%" . $cari . "%'");
+        $data = query("SELECT * FROM hardware WHERE nama LIKE '%" . $cari . "%'");
     } else {
         // jika tidak ada data yang dicari
-        $data = mysqli_query($koneksi, "SELECT * FROM hardware");
+        $data = query("SELECT * FROM hardware");
     }
     // inisialisasi variabel no untuk urutan data
     $no = 1;
@@ -37,7 +37,7 @@ include "../assets/shortcut/koneksi.php";
         <tr>
             <th class="align-content-center" scope="row"><?= $no++; ?></th>
             <td class="align-content-center">
-                <img src="http://localhost/pw2024_tubes_233040070/admin/crud/recource/gambar/<?= $tampil['gambar'] ?>" alt="<?= $tampil['gambar'] ?>">
+                <img src="admin/crud/recource/gambar/<?= $tampil['gambar'] ?>" alt="<?= $tampil['gambar'] ?>">
             </td>
             <td class="align-content-center"><?= $tampil['nama']; ?></td>
             <td class="align-content-center"><?= $tampil['kategori']; ?></td>

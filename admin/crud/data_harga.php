@@ -1,5 +1,5 @@
 <?php
-include "../../assets/shortcut/koneksi.php";
+include "../../assets/function/function.php";
 ?>
 <table class="text-center table table-bordered table-hover table-responsive table-sm tableku">
     <thead class="table-success">
@@ -24,9 +24,9 @@ include "../../assets/shortcut/koneksi.php";
     // mengecek apakah ada data yang dicari
     if (isset($_POST['cari'])) {
         $cari = $_POST['cari'];
-        $data = mysqli_query($koneksi, "SELECT * FROM harga INNER JOIN hardware ON harga.id_hardware = hardware.id_hardware WHERE hardware.nama LIKE '%" . $cari . "%'");
+        $data = query("SELECT * FROM harga INNER JOIN hardware ON harga.id_hardware = hardware.id_hardware WHERE hardware.nama LIKE '%" . $cari . "%'");
     } else {
-        $data = mysqli_query($koneksi, "SELECT * FROM harga INNER JOIN hardware ON harga.id_hardware = hardware.id_hardware");
+        $data = query("SELECT * FROM harga INNER JOIN hardware ON harga.id_hardware = hardware.id_hardware");
     }
     // inisialisasi variabel no untuk urutan data
     $no = 1;

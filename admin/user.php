@@ -16,9 +16,10 @@
 <body>
     <?php
     include "../assets/shortcut/nav.php";
+    include "../assets/function/function.php";
     if (isset($_GET['id'])) {
         $getId = $_GET['id'];
-        $query = mysqli_query($koneksi, "SELECT * FROM user WHERE id='$getId'");
+        $query = query("SELECT * FROM user WHERE id='$getId'");
         while ($tampil = mysqli_fetch_assoc($query)) {
             $username = $tampil['username'];
             $password = $tampil['password'];

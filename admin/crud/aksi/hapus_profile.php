@@ -1,9 +1,9 @@
 <?php
-include "../../../assets/shortcut/koneksi.php";
+include "../../../assets/function/function.php";
 session_start();
 // cek siapa yang sedang login
 $current = $_SESSION['user'];
-$query_current = mysqli_query($koneksi, "SELECT * FROM user WHERE username='$current'");
+$query_current = query("SELECT * FROM user WHERE username='$current'");
 $data_current = mysqli_fetch_array($query_current);
 if ($_SESSION['status'] != "login") {
     header("location:../../../index.php?=belum_login");
@@ -13,7 +13,7 @@ if ($_SESSION['status'] != "login") {
 if (isset($_GET['id'])) {
     $id = $_GET["id"];
     // mengambil data user yang di hapus
-    $query_user = mysqli_query($koneksi, "SELECT * FROM user WHERE `id`='$id';");
+    $query_user = query("SELECT * FROM user WHERE `id`='$id';");
     $data_user = mysqli_fetch_array($query_user);
     if ($data_current['role'] == "admin") {
         if ($data_current['username'] != $data_user['username']) {
@@ -23,15 +23,13 @@ if (isset($_GET['id'])) {
         }
     }
     // mengambil gambar dari database
-    $query = mysqli_query($koneksi, "SELECT gambar FROM user WHERE `id`='$id';");
+    $query = query("SELECT gambar FROM user WHERE `id`='$id';");
     $cek = mysqli_num_rows($query);
     $data = mysqli_fetch_array($query);
     $gambar = $data['gambar'];
     // menghapus gambar dari folder gambar_profile
-    if (file_exists("../recource/gambar_profile/" . $gambar)) {
-        unlink("../recource/gambar_profile/" . $gambar);
-    }
-    $query = mysqli_query($koneksi, "DELETE FROM user WHERE `id`='$id';");
+    cek_gambar($gambar);
+    $query = query("DELETE FROM user WHERE `id`='$id';");
     // cek apakah user yang dihapus adalah user yang sedang login
     if ($data_user['username'] == $data_current['username']) {
         // jika user yang dihapus adalah user yang sedang login maka akan diarahkan ke halaman login

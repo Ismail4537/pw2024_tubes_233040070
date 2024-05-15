@@ -17,6 +17,7 @@
 <body>
     <?php
     include "../../../assets/shortcut/nav.php";
+    include "../../../assets/function/function.php";
     ?>
     <section class="main">
         <form action="../aksi/aksi_tambah.php" method="post" class="d-flex flex-column border rounded text-center mx-5">
@@ -32,7 +33,7 @@
                     <select name="id_hardware" class="form-select" aria-label="Default select example">
                         <option selected>Hardware</option>
                         <?php
-                        $query = mysqli_query($koneksi, "SELECT * FROM hardware");
+                        $query = query("SELECT * FROM hardware");
                         while ($tampil = mysqli_fetch_array($query)) {
                         ?>
                             <option value="<?= $tampil['id_hardware'] ?>"><?= $tampil['nama'] ?> - <?= $tampil['kategori'] ?></option>

@@ -1,5 +1,5 @@
 <?php
-include "../assets/shortcut/koneksi.php";
+include "../assets/function/function.php";
 if (isset($_POST["save"])) {
     $username = $_POST["username"];
     $email = $_POST["email"];
@@ -7,68 +7,67 @@ if (isset($_POST["save"])) {
     $password2 = $_POST["password2"];
     // cek apakah email valid
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        header("location:../register.php?=email_tidak_valid");
+        session_start();
+        $_SESSION['gagal'] = "Email tidak valid";
+        header("location:../register.php");
         return;
     }
     // cek apakah username valid
     if (!preg_match("/^[a-zA-Z0-9 ]*$/", $username)) {
-        header("location:../register.php?=username_tidak_valid");
+        session_start();
+        $_SESSION['gagal'] = "Username tidak valid<br>hanya boleh menggunakan huruf dan angka";
+        header("location:../register.php");
         return;
     }
     // cek apakah password valid
-    // password tidak boleh ada spasi dan hanya boleh berisi huruf dan angka
-    if (!preg_match("/^[a-zA-Z0-9]*$/", $password)) {
-        header("location:../register.php?=password_tidak_valid");
+    $apakah_valid = cek_password($password, $password2);
+    if ($apakah_valid == 1) {
+        session_start();
+        $_SESSION['gagal'] = "Password tidak valid";
+        header("location:../form/edit_profile.php?id=$id");
+        return;
+    } else if ($apakah_valid == 2) {
+        session_start();
+        $_SESSION['gagal'] = "Password kurang dari 10 kata";
+        header("location:../form/edit_profile.php?id=$id");
+        return;
+    } elseif ($apakah_valid == 3) {
+        session_start();
+        $_SESSION['gagal'] = "Password tidak sama";
+        header("location:../form/edit_profile.php?id=$id");
+        return;
     }
     // enkripsi password
     $password = md5($_POST["password"]);
     $password2 = md5($_POST["password2"]);
-    // cek apakah password sama
-    if ($password != $password2) {
-        // jika password tidak sama maka akan diarahkan ke halaman register.php
-        header("location:../register.php?=password_tidak_sama");
-        return;
-        // cek apakah password lebih dari 10 kata
-    } elseif (strlen($_POST["password"]) < 10) {
-        // jika password kurang dari 10 kata maka akan diarahkan ke halaman register.php
-        header("location:../register.php?=password_kurang_dari_10_kata");
-        return;
-    }
-    $query_user = mysqli_query($koneksi, "SELECT * FROM user WHERE username='$username' OR email='$email'");
+
+    $query_user = query("SELECT * FROM user WHERE username='$username' OR email='$email'");
     $tampil_user = mysqli_fetch_assoc($query_user);
-    $query_password = mysqli_query($koneksi, "SELECT password FROM user WHERE password='$password'");
+    $query_password = query("SELECT password FROM user WHERE password='$password'");
     $tampil_password = mysqli_fetch_assoc($query_password);
 
-    // echo $tampil_user['username'];
-    // echo "<br>";
-    // echo $tampil_user['email'];
-    // echo "<br>";
-    // echo $tampil_password['password'];
-    // echo "<hr>";
-    // echo $username;
-    // echo "<br>";
-    // echo $email;
-    // echo "<br>";
-    // echo $password;
-    // echo "<br>";
-
     if ($tampil_user['username'] == $username || $tampil_user['email'] == $email) {
+        session_start();
+        $_SESSION['gagal'] = "Username atau email sudah di gunakan";
         header("location:../register.php?=username_atau_email_sudah_digunakan");
-        // echo "username atau email sama";
         return;
     } elseif ($tampil_password['password'] == $password) {
+        session_start();
+        $_SESSION['gagal'] = "Password sudah digunakan";
         header("location:../register.php?=password_sudah_digunakan");
-        // echo "password sama";
         return;
     }
-    // return;
 
-    $query = mysqli_query($koneksi, "INSERT INTO `user` (`id`, `username`, `email`, `password`, `role`, `gambar`) VALUES (NULL, '$username', '$email', '$password', 'admin', '');");
+    $query = query("INSERT INTO `user` (`id`, `username`, `email`, `password`, `role`, `gambar`) VALUES (NULL, '$username', '$email', '$password', 'admin', '');");
     if ($query) {
-        header("location:../admin/index.php");
+        session_start();
+        $_SESSION['berhasil'] = "Silahkan login";
+        header("location:../login.php");
     } else {
         // jika gagal maka akan diarahkan ke halaman tambah.php
-        header("location:../register.php?=gagal_register");
+        session_start();
+        $_SESSION['gagal'] = "gagal register";
+        header("location:../register.php");
     }
 } else {
     echo "ERROR: Tidak bisa akses halaman ini tanpa melalui form tambah data";

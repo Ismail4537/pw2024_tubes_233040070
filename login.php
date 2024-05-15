@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="assets/style/base.css">
     <link rel="stylesheet" href="assets/style/form.css">
     <link rel="stylesheet" href="assets/style/bootstrap.min.css">
-    <link rel="stylesheet" href="http://localhost/pw2024_tubes_233040070/admin/assets/plugins/fontawesome-free-6.5.2-web/css/all.css">
+    <link rel="stylesheet" href="assets/plugins/fontawesome-free-6.5.2-web/css/all.css">
     <title>GaleryTek | Form Login</title>
 </head>
 
@@ -16,6 +16,17 @@
     <section class="main">
         <form action="aksi/aksi_login.php" class="border rounded mx-5" method="post">
             <h2 class="title rounded-top text-center text-white pb-2">Form Login</h2>
+            <?php
+            session_start();
+            if (isset($_SESSION['gagal'])) {
+                echo "<div class='alert alert-danger m-auto mx-5' role='alert'>" . $_SESSION['gagal'] . "</div>";
+                unset($_SESSION['gagal']);
+            } else if (isset($_SESSION['berhasil'])) {
+                echo "<div class='alert alert-success m-auto mx-5' role='alert'>" . $_SESSION['berhasil'] . "</div>";
+                unset($_SESSION['berhasil']);
+            }
+            session_destroy();
+            ?>
             <div class="form d-flex m-2 flex-column">
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1">Username/Email</span>

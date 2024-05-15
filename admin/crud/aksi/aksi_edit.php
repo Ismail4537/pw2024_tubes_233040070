@@ -1,5 +1,5 @@
 <?php
-include "../../../assets/shortcut/koneksi.php";
+include "../../../assets/function/function.php";
 if (isset($_POST['hardware'])) {
     $id = $_POST["id"];
     $nama = $_POST["nama"];
@@ -8,12 +8,10 @@ if (isset($_POST['hardware'])) {
     // cek apakah user ingin mengubah gambar
     if (isset($_POST['upt'])) {
         // hapus gambar lama
-        $query = mysqli_query($koneksi, "SELECT gambar FROM hardware WHERE id_hardware='$id';");
+        $query = query("SELECT gambar FROM hardware WHERE id_hardware='$id';");
         $data = mysqli_fetch_array($query);
         $gambar = $data['gambar'];
-        if (file_exists("../recource/gambar/" . $gambar)) {
-            unlink("../recource/gambar/" . $gambar);
-        }
+        cek_gambar($gambar);
         // tambah gambar baru & edit data
         $temp = $_FILES['gambaru']['tmp_name'];
         $gambaru = rand(0, 9999) . $_FILES['gambaru']['name'];
@@ -21,7 +19,7 @@ if (isset($_POST['hardware'])) {
         $type = $_FILES['gambaru']['type'];
         if (($size <= 5000000) and ($type == 'image/jpeg' or $type == 'image/png')) {
             move_uploaded_file($temp, "../recource/gambar/" . $gambaru);
-            $query = mysqli_query($koneksi, "UPDATE `hardware` SET `nama` = '$nama', `kategori` = '$kategori', `deskripsi` = '$deskripsi', `gambar` = '$gambaru' WHERE `hardware`.`id_hardware` = $id");
+            $query = query("UPDATE `hardware` SET `nama` = '$nama', `kategori` = '$kategori', `deskripsi` = '$deskripsi', `gambar` = '$gambaru' WHERE `hardware`.`id_hardware` = $id");
             if ($query) {
                 header("location:../../hardware.php#main");
                 unset($_POST['hardware']);
@@ -43,7 +41,7 @@ if (isset($_POST['hardware'])) {
         }
         // jika user tidak ingin mengubah gambar
     } else {
-        $query = mysqli_query($koneksi, "UPDATE `hardware` SET `nama` = '$nama', `kategori` = '$kategori', `deskripsi` = '$deskripsi' WHERE `hardware`.`id_hardware` = $id");
+        $query = query("UPDATE `hardware` SET `nama` = '$nama', `kategori` = '$kategori', `deskripsi` = '$deskripsi' WHERE `hardware`.`id_hardware` = $id");
         if ($query) {
             header("location:../../hardware.php#main");
         } else {
@@ -64,7 +62,7 @@ if (isset($_POST['hardware'])) {
         unset($_POST['harga']);
         return;
     }
-    $query = mysqli_query($koneksi, "UPDATE `harga` SET `id_hardware` = '$id_hardware', `avg_price` = '$avg_price', `tanggal` = '$tanggal' WHERE `harga`.`id_harga` = $id");
+    $query = query("UPDATE `harga` SET `id_hardware` = '$id_hardware', `avg_price` = '$avg_price', `tanggal` = '$tanggal' WHERE `harga`.`id_harga` = $id");
     if ($query) {
         header("location:../../harga.php#main");
         unset($_POST['harga']);

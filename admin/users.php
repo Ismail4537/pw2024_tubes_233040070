@@ -21,6 +21,7 @@
     <?php
     // mengambil konfigurasi koneksi
     include "../assets/shortcut/nav.php";
+    include "../assets/function/function.php";
     if ($tampil_user['role'] != "super admin") {
         header("location:index.php?=anda_bukan_super_admin");
     }
@@ -29,7 +30,7 @@
         <h4><img src="../assets/style/gambar/Tek.png" alt="Tek" width="100px"></h4>
         <h1>GaleryTek | Data Users</h1>
         <br>
-        <p>GaleryTek adalah sebuah galery teknologi dimana berfungsi sebagai platform untuk menampilkan berbagai jenis Hardware komputer dalam bentuk gambar dengan deskripsinya</p>
+        <p class="mx-4">GaleryTek adalah sebuah galery teknologi dimana berfungsi sebagai platform untuk menampilkan berbagai jenis Hardware komputer dalam bentuk gambar dengan deskripsinya</p>
     </header>
     <marquee behavior="" direction="left" class="bg-dark text-white">
         Selamat datang,
@@ -44,6 +45,9 @@
                 <div class="d-flex" role="search">
                     <input class="form-control me-2" class="cari" type="text" placeholder="Search" name="cari" id="cari" aria-label="Search">
                     <i class='fa-solid fa-magnifying-glass my-auto'></i>
+                </div>
+                <div class="buttons">
+                    <a href="" class="btn btn-danger">PDF Report <i class="fa-regular fa-file-pdf ms-2"></i></a>
                 </div>
             </div>
             <table class="text-center table table-bordered table-hover table-responsive table-sm tableku">
@@ -67,7 +71,7 @@
                     </tr>
                 </tfoot>
                 <?php
-                $data = mysqli_query($koneksi, "SELECT * FROM user");
+                $data = query("SELECT * FROM user");
                 // inisialisasi variabel no untuk urutan data
                 $no = 1;
                 // menampilkan data dari database

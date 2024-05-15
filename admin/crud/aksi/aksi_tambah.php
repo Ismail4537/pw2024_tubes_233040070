@@ -1,5 +1,5 @@
 <?php
-include "../../../assets/shortcut/koneksi.php";
+include "../../../assets/function/function.php";
 if (isset($_POST['hardware'])) {
     // mengambil data dari form
     $nama = $_POST["nama"];
@@ -16,7 +16,7 @@ if (isset($_POST['hardware'])) {
         // memindahkan gambar ke folder gambar
         move_uploaded_file($temp, "../recource/gambar/" . $gambar);
         // menambahkan data ke database
-        $query = mysqli_query($koneksi, "INSERT INTO hardware (`id_hardware`, `nama`, `kategori`, `deskripsi`, `gambar`) VALUES (NULL, '$nama', '$kategori', '$deskripsi', '$gambar')");
+        $query = query("INSERT INTO hardware (`id_hardware`, `nama`, `kategori`, `deskripsi`, `gambar`) VALUES (NULL, '$nama', '$kategori', '$deskripsi', '$gambar')");
         if ($query) {
             // jika berhasil maka akan diarahkan ke halaman hardware.php
             header("location:../../hardware.php#main");
@@ -49,7 +49,7 @@ if (isset($_POST['hardware'])) {
         return;
     }
     // menambahkan data ke database
-    $query = mysqli_query($koneksi, "INSERT INTO harga (`id_harga`, `id_hardware`, `avg_price`, `tanggal`) VALUES (NULL, '$id_hardware', '$avg_price', '$tanggal')");
+    $query = query("INSERT INTO harga (`id_harga`, `id_hardware`, `avg_price`, `tanggal`) VALUES (NULL, '$id_hardware', '$avg_price', '$tanggal')");
     if ($query) {
         // jika berhasil maka akan diarahkan ke halaman harga.php
         header("location:../../harga.php#main");

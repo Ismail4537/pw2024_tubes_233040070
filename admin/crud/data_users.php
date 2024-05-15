@@ -1,5 +1,5 @@
 <?php
-include "../../assets/shortcut/koneksi.php";
+include "../../assets/function/function.php";
 ?>
 <table class="text-center table table-bordered table-hover table-responsive table-sm tableku">
     <thead class="table-success">
@@ -25,10 +25,10 @@ include "../../assets/shortcut/koneksi.php";
     // mengecek apakah ada data yang dicari
     if (isset($_POST['cari'])) {
         $cari = $_POST['cari'];
-        $data = mysqli_query($koneksi, "SELECT * FROM user WHERE username LIKE '%" . $cari . "%' or email LIKE '%" . $cari . "%'");
+        $data = query("SELECT * FROM user WHERE username LIKE '%" . $cari . "%' or email LIKE '%" . $cari . "%'");
     } else {
         // jika tidak ada data yang dicari
-        $data = mysqli_query($koneksi, "SELECT * FROM user");
+        $data = query("SELECT * FROM user");
     }
     // inisialisasi variabel no untuk urutan data
     $no = 1;
