@@ -46,11 +46,11 @@ $html =
         <table width="100%" class="table table-striped">
             <thead>
             <tr>
-                <th class="align-content-center" width="8%">#</th>
-                <th class="align-content-center" width="20%">Gambar</th>
-                <th class="align-content-center">Username</th>
-                <th class="align-content-center" width="20%">Role</th>
-                <th class="align-content-center">Password</th>
+                <th width="8%">#</th>
+                <th width="20%">Gambar</th>
+                <th>Username</th>
+                <th width="20%">Role</th>
+                <th>Password</th>
             </tr>
             </thead>
             <tbody>';
