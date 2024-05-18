@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="assets/style/base.css">
     <link rel="stylesheet" href="assets/style/form.css">
     <link rel="stylesheet" href="assets/style/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/plugins/fontawesome-free-6.5.2-web/css/all.css">
     <title>GaleryTek | Form Login</title>
 </head>
 

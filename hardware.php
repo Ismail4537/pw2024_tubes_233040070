@@ -7,7 +7,6 @@
     <link rel="icon" href="assets/style/gambar/Tek.png">
     <link rel="stylesheet" href="assets/style/base.css">
     <link rel="stylesheet" href="assets/style/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/plugins/fontawesome-free-6.5.2-web/css/all.css">
     <link rel="stylesheet" href="assets/style/index.css">
     <title>GaleryTek</title>
     <!-- <style>
@@ -32,12 +31,14 @@
     <section class="main d-flex flex-column p-1" id="main">
         <div class="data m-auto">
             <div class="ultility d-flex justify-content-between m-3">
-                <div class="d-flex mx-2" role="search">
-                    <input class="form-control me-2" class="cari" type="text" placeholder="Search" name="cari" id="cari" aria-label="Search">
-                    <i class='fa-solid fa-magnifying-glass my-auto'></i>
+                <div class="searchs">
+                    <div class="d-flex mx-2" role="search">
+                        <input class="form-control me-2" class="cari" type="text" placeholder="Search" name="cari" id="cari" aria-label="Search">
+                        <i class='fa-solid fa-magnifying-glass my-auto'></i>
+                    </div>
                 </div>
                 <div class="buttons">
-                    <a href="" class="btn btn-danger">PDF Report <i class="fa-regular fa-file-pdf ms-2"></i></a>
+                    <a href="pdf/pdf_hardware.php" class="btn btn-danger">PDF Report <i class="fa-regular fa-file-pdf ms-2"></i></a>
                 </div>
             </div>
             <table class="text-center table table-bordered table-hover table-responsive table-sm tableku">
@@ -63,7 +64,7 @@
                 // mengecek apakah ada data yang dicari
                 if (isset($_GET['id'])) {
                     $id = $_GET['id'];
-                    $data = query("SELECT * FROM hardware WHERE id_hardware =" . $id);
+                    $data = query("SELECT * FROM hardware WHERE id_hardware =" . $id . "");
                 } else {
                     // jika tidak ada data yang dicari
                     $data = query("SELECT * FROM hardware");

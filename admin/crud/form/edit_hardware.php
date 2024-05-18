@@ -6,26 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../../../assets/style/gambar/Tek.png">
     <link rel="stylesheet" href="../../../assets/style/base.css">
-    <link rel="stylesheet" href="../../../assets/style/form.css">
-    <link rel="stylesheet" href="../../../assets/plugins/fontawesome-free-6.5.2-web/css/all.css">
     <link rel="stylesheet" href="../../../assets/style/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../assets/style/form.css">
     <title>GaleryTek | Form Edit Hardware</title>
 </head>
 
 <body>
     <?php
     include "../../../assets/shortcut/nav.php";
+    if (!$_GET["id"]) {
+        header("location:../../harga.php?=id_kosong");
+        return;
+    }
+    $id = $_GET["id"];
+    $query = mysqli_query($koneksi, "SELECT * FROM hardware WHERE id_hardware='$id'");
+    $tampil = mysqli_fetch_array($query)
     ?>
     <section class="main">
-        <?php
-        if (!$_GET["id"]) {
-            header("location:../../harga.php?=id_kosong");
-            return;
-        }
-        $id = $_GET["id"];
-        $query = mysqli_query($koneksi, "SELECT * FROM hardware WHERE id_hardware='$id'");
-        ($tampil = mysqli_fetch_array($query))
-        ?>
         <form action="../aksi/aksi_edit.php" method="post" enctype="multipart/form-data" class="d-flex flex-column border rounded text-center mx-5">
             <h2 class="title rounded-top text-white p-1">Form Edit Hardware</h2>
             <?php

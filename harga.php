@@ -7,7 +7,6 @@
     <link rel="icon" href="assets/style/gambar/Tek.png">
     <link rel="stylesheet" href="assets/style/base.css">
     <link rel="stylesheet" href="assets/style/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/plugins/fontawesome-free-6.5.2-web/css/all.css">
     <link rel="stylesheet" href="assets/style/index.css">
     <title>GaleryTek</title>
     <!-- <style>
@@ -37,7 +36,7 @@
                     <i class='fa-solid fa-magnifying-glass my-auto'></i>
                 </div>
                 <div class="buttons">
-                    <a href="" class="btn btn-danger">PDF Report <i class="fa-regular fa-file-pdf ms-2"></i></a>
+                    <a href="pdf/pdf_harga.php" class="btn btn-danger">PDF Report <i class="fa-regular fa-file-pdf ms-2"></i></a>
                 </div>
             </div>
             <table class="text-center table table-bordered table-hover table-responsive table-sm tableku">

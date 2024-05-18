@@ -1,0 +1,32 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 10px;
+}
+header div {
+  display: flex;
+  justify-content: space-between;
+  /* border: 1px solid red; */
+}
+table {
+  width: 100%;
+}
+.table {
+  border-collapse: collapse;
+  border: 2px solid black;
+}
+.table th,
+.table td {
+  border: 2px solid black;
+  padding: 10px;
+}
+/* tr ganjil */
+.table tbody tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}

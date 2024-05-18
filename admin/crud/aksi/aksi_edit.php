@@ -58,6 +58,8 @@ if (isset($_POST['hardware'])) {
     $tanggal = $_POST["tanggal"];
     // cek apakah harga rata-rata pasaran sesuai
     if ($avg_price < 0 or $avg_price > 1000000000) {
+        session_start();
+        $_SESSION['gagal'] = "Harga rata-rata tidak sesuai(harga rata-rata tidak boleh kurang dari 0 atau lebih dari 1.000.000.000)";
         header("location:../form/edit_harga.php?id=$id");
         unset($_POST['harga']);
         return;
