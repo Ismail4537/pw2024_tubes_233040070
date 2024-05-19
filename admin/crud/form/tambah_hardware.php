@@ -56,6 +56,7 @@
     <?php
     include "../../../assets/shortcut/link.php";
     ?>
+    <script type="text/javascript" src="../../../assets/script/NoRClick.js"></script>
 </body>
 
 </html>

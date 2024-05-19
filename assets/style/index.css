@@ -23,7 +23,8 @@ table td {
   }
   .action a,
   .ultility input,
-  .ultility a {
+  .ultility a,
+  .select {
     font-size: 12px;
   }
 }
@@ -34,7 +35,8 @@ table td {
   }
   .action a,
   .ultility input,
-  .ultility a {
+  .ultility a,
+  .select {
     font-size: 8px;
   }
 }

@@ -23,13 +23,19 @@ include "../../assets/function/function.php";
         </tr>
     </tfoot>
     <?php
-    // mengecek apakah ada data yang dicari
-    if (isset($_POST['cari'])) {
-        $cari = $_POST['cari'];
-        $data = query("SELECT * FROM hardware WHERE nama LIKE '%" . $cari . "%'");
-    } else {
-        // jika tidak ada data yang dicari
-        $data = query("SELECT * FROM hardware");
+    $sort1 = "id_hardware";
+    $sort2 = "ASC";
+    $cari1 = "";
+    $cari2 = "nama";
+    if (isset($_POST['sort1']) or isset($_POST['sort2'])) {
+        $sort1 = $_POST['sort1'];
+        $sort2 = $_POST['sort2'];
+        $cari1 = $_POST['cari1'];
+        $cari2 = $_POST['cari2'];
+    }
+    $data = search_single("hardware", $sort1, $sort2, $cari1, $cari2);
+    if (mysqli_num_rows($data) == 0) {
+        echo "<tr><td colspan='5'>Data tidak ditemukan</td></tr>";
     }
     // inisialisasi variabel no untuk urutan data
     $no = 1;
@@ -46,8 +52,8 @@ include "../../assets/function/function.php";
             <td class="align-content-center"><?= $tampil['deskripsi']; ?></td>
             <td class='align-content-center'>
                 <div class='action d-flex flex-column'>
-                    <a href='form/edit_hardware.php?id=<?= $tampil['id_hardware'] ?>' class='btn btn-success mb-1'>Edit</a>
-                    <a href='aksi/hapus.php?id_hardware=<?= $tampil['id_hardware'] ?>' class='btn btn-danger' onclick='return confirm(`Anda yakin mau menghapus item ini ?`)'>Hapus</a>
+                    <a href='crud/form/edit_hardware.php?id=<?= $tampil['id_hardware'] ?>' class='btn btn-success mb-1'>Edit</a>
+                    <a href='crud/aksi/hapus.php?id_hardware=<?= $tampil['id_hardware'] ?>' class='btn btn-danger' onclick='return confirm(`Anda yakin mau menghapus item ini ?`)'>Hapus</a>
                 </div>
             </td>
         </tr>

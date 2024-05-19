@@ -21,12 +21,19 @@ include "../../assets/function/function.php";
         </tr>
     </tfoot>
     <?php
-    // mengecek apakah ada data yang dicari
-    if (isset($_POST['cari'])) {
-        $cari = $_POST['cari'];
-        $data = query("SELECT * FROM harga INNER JOIN hardware ON harga.id_hardware = hardware.id_hardware WHERE hardware.nama LIKE '%" . $cari . "%'");
-    } else {
-        $data = query("SELECT * FROM harga INNER JOIN hardware ON harga.id_hardware = hardware.id_hardware");
+    $sort1 = "id_harga";
+    $sort2 = "ASC";
+    $cari1 = "";
+    $cari2 = "hardware.nama";
+    if (isset($_POST['sort1']) or isset($_POST['sort2'])) {
+        $sort1 = $_POST['sort1'];
+        $sort2 = $_POST['sort2'];
+        $cari1 = $_POST['cari1'];
+        $cari2 = $_POST['cari2'];
+    }
+    $data = query("SELECT * FROM harga INNER JOIN hardware ON harga.id_hardware = hardware.id_hardware WHERE $cari2 LIKE '%" . $cari1 . "%' ORDER BY " . $sort1 . " " . $sort2 . "");
+    if (mysqli_num_rows($data) == 0) {
+        echo "<tr><td colspan='5'>Data tidak ditemukan</td></tr>";
     }
     // inisialisasi variabel no untuk urutan data
     $no = 1;
@@ -36,7 +43,7 @@ include "../../assets/function/function.php";
     ?>
         <tr>
             <th class="align-content-center" scope="row"><?= $no++; ?></th>
-            <td class="align-content-center"><img src="crud/recource/gambar/<?= $tampil['gambar'] ?>" alt=""><br><a class="text-dark" href="hardware.php?id=<?= $tampil['id_hardware']; ?>#main"><?= $tampil['nama']; ?></a><br><?= $tampil['kategori'] ?></td>
+            <td class="align-content-center"><img src="crud/recource/gambar/<?= $tampil['gambar'] ?>" alt=""><br><b><a style="color: black;" href="hardware.php?nama=<?= $tampil['nama'] ?>#main"><?= $tampil['nama']; ?></a></b><br><?= $tampil['kategori'] ?></td>
             <td class="align-content-center">
                 <p class="mx-2">Rp,<?= number_format($tampil['avg_price'], 0, '', '.'); ?>,00</p>
             </td>

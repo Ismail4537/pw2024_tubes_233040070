@@ -22,13 +22,19 @@ include "../../assets/function/function.php";
         </tr>
     </tfoot>
     <?php
-    // mengecek apakah ada data yang dicari
-    if (isset($_POST['cari'])) {
-        $cari = $_POST['cari'];
-        $data = query("SELECT * FROM user WHERE username LIKE '%" . $cari . "%' or email LIKE '%" . $cari . "%'");
-    } else {
-        // jika tidak ada data yang dicari
-        $data = query("SELECT * FROM user");
+    $sort1 = "id";
+    $sort2 = "ASC";
+    $cari1 = "";
+    $cari2 = "username";
+    if (isset($_POST['sort1']) or isset($_POST['sort2'])) {
+        $sort1 = $_POST['sort1'];
+        $sort2 = $_POST['sort2'];
+        $cari1 = $_POST['cari1'];
+        $cari2 = $_POST['cari2'];
+    }
+    $data = search_single("user", $sort1, $sort2, $cari1, $cari2);
+    if (mysqli_num_rows($data) == 0) {
+        echo "<tr><td colspan='5'>Data tidak ditemukan</td></tr>";
     }
     // inisialisasi variabel no untuk urutan data
     $no = 1;
@@ -43,7 +49,7 @@ include "../../assets/function/function.php";
         <tr>
             <th class="align-content-center" scope="row"><?= $no++; ?></th>
             <td class="align-content-center">
-                <img class="rounded-circle" src="crud/recource/gambar_profile/<?= $gambar ?>" alt="<?= $gambar ?>">
+                <img class="rounded-circle" src="crud/recource/gambar_profile/<?= $gambar ?>" alt="<?= $gambar ?>" style="width: 50px; height:50px;">
             </td>
             <td class="align-content-center"><a href="user.php?id=<?= $tampil['id'] ?>"><?= $tampil['username']; ?></a><br><b><?= $tampil['role']; ?></b></td>
             <td class="align-content-center"><?= $tampil['email']; ?></td>

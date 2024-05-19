@@ -59,8 +59,8 @@
                         </select>
                     </div>
                     <div class="form-floating mb-2">
-                        <textarea name="deskripsi" class="form-control" placeholder="Masukan Deskripsi" id="floatingTextarea"><?= $tampil['deskripsi']; ?></textarea>
-                        <label for="floatingTextarea">Deskripsi</label>
+                        <textarea name="deskripsi" class="form-control" placeholder="Masukan Deskripsi" id="deskripsi"><?= $tampil['deskripsi']; ?></textarea>
+                        <label for="deskripsi">Deskripsi</label>
                     </div>
                     <label>Gambar Baru</label>
                     <div class="input-group mb-2">
@@ -79,6 +79,7 @@
     <?php
     include "../../../assets/shortcut/link.php";
     ?>
+    <script type="text/javascript" src="../../../assets/script/NoRClick.js"></script>
 </body>
 
 </html>

@@ -13,6 +13,12 @@ function query($input)
     $query = mysqli_query($koneksi, $input);
     return $query;
 }
+function search_single($table, $sort1, $sort2, $cari1, $cari2)
+{
+    $koneksi = koneksi();
+    $query = query("SELECT * FROM " . $table . " WHERE " . $cari2 . " LIKE '%" . $cari1 . "%' ORDER BY " . $sort1 . " " . $sort2 . "");
+    return $query;
+}
 
 function cek_gambar($gambar)
 {

@@ -23,60 +23,47 @@
     include "assets/function/function.php";
     ?>
     <header class="d-flex align-content-center justify-content-center flex-column text-center" style="height: 100vh; color: black;">
-        <h4><img src="assets/style/gambar/Tek.png" alt="Tek" width="100px"></h4>
+        <h4><img class="TEK" src="assets/style/gambar/Tek.png" alt="Tek" width="100px"></h4>
         <h1>GaleryTek</h1>
         <br>
         <p class="mx-4">GaleryTek adalah sebuah galery teknologi dimana berfungsi sebagai platform untuk menampilkan berbagai jenis Hardware komputer dalam bentuk gambar dengan deskripsinya</p>
     </header>
     <section class="main d-flex flex-column p-1" id="main">
         <div class="data m-auto">
-            <div class="ultility d-flex justify-content-between m-3">
-                <div class="d-flex mx-2" role="search">
-                    <input class="form-control me-2" class="cari" type="text" placeholder="Search" name="cari" id="cari" aria-label="Search">
-                    <i class='fa-solid fa-magnifying-glass my-auto'></i>
-                </div>
-                <div class="buttons">
-                    <a href="pdf/pdf_harga.php" class="btn btn-danger">PDF Report <i class="fa-regular fa-file-pdf ms-2"></i></a>
+            <div class="ultility d-flex m-3">
+                <div class="d-flex flex-column">
+                    <div class="d-flex">
+                        <div class="d-flex me-2 form-floating mb-2">
+                            <select name="sort1" id="sort1" class="form-select select" aria-label="Default select example">
+                                <option selected value="id_harga">Id</option>
+                                <option value="avg_price">Harga rata-rata</option>
+                                <option value="tanggal">Tanggal Rekap</option>
+                            </select>
+                            <label for="sort1" class="select">Sort By</label>
+                        </div>
+                        <div class="d-flex me-2 form-floating">
+                            <select name="sort2" id="sort2" class="form-select select" aria-label="Default select example">
+                                <option selected value="ASC">Menaik</option>
+                                <option value="DESC">Menurun</option>
+                            </select>
+                            <label for="sort2" class="select">Urutan</label>
+                        </div>
+                    </div>
+                    <div class="input-group my-auto">
+                        <select name="cari2" id="cari2" class="form-select mx-auto select" aria-label="Default select example">
+                            <option selected value="hardware.nama">Hardware</option>
+                            <option value="hardware.kategori">Kategori</option>
+                            <option value="harga.avg_price">Harga rata-rata</option>
+                            <option value="harga.tanggal">Tanggal Rekap</option>
+                        </select>
+                        <input name="cari1" id="cari1" class="form-control" type="search" placeholder="Search">
+                        <div class="input-group-text">
+                            <i class='fa-solid fa-magnifying-glass'></i>
+                        </div>
+                    </div>
                 </div>
             </div>
             <table class="text-center table table-bordered table-hover table-responsive table-sm tableku">
-                <thead class="table-success">
-                    <tr>
-                        <th class="align-content-center" width="2%">#</th>
-                        <th class="align-content-center" width="10%">Hardware</th>
-                        <th class="align-content-center" width="10%">Harga rata-rata</th>
-                        <th class="align-content-center" width="10%">Tanggal Rekap</th>
-                    </tr>
-                </thead>
-                <tfoot class="table-success">
-                    <tr>
-                        <th class="align-content-center">#</th>
-                        <th class="align-content-center">Hardware</th>
-                        <th class="align-content-center">Harga rata-rata</th>
-                        <th class="align-content-center">Tanggal Rekap</th>
-                    </tr>
-                </tfoot>
-                <?php
-                // mengecek apakah ada data yang dicari
-                $data = query("SELECT * FROM harga INNER JOIN hardware ON harga.id_hardware = hardware.id_hardware");
-                // }
-                // inisialisasi variabel no untuk urutan data
-                $no = 1;
-                // menampilkan data dari database
-                while ($tampil = mysqli_fetch_array($data)) {
-                    $date = date_create($tampil['tanggal']);
-                ?>
-                    <tr>
-                        <th class="align-content-center" scope="row"><?= $no++; ?></th>
-                        <td class="align-content-center"><img src="admin/crud/recource/gambar/<?= $tampil['gambar'] ?>" alt=""><br><a class="text-dark" href="hardware.php?id=<?= $tampil['id_hardware']; ?>#main"><?= $tampil['nama']; ?></a><br><?= $tampil['kategori'] ?></td>
-                        <td class="align-content-center">
-                            <p class="mx-2">Rp,<?= number_format($tampil['avg_price'], 0, '', '.'); ?>,00</p>
-                        </td>
-                        <td class="align-content-center"><?= date_format($date, "Y/M/d l"); ?></td>
-                    </tr>
-                <?php
-                }
-                ?>
             </table>
         </div>
     </section>
@@ -85,19 +72,51 @@
     ?>
     <script>
         $(document).ready(function() {
-            $(" body").on("change keyup keydown", "#cari", function() {
-                var cari = $(this).val();
-                var data = "cari=" + cari;
-                // alert(data);
+            load_data();
+
+            function load_data(sort1, sort2, cari1, cari2) {
                 $.ajax({
-                    method: 'POST',
-                    url: 'data/data_harga.php',
-                    data: data,
-                    success: function(result) {
-                        $(".tableku").html(result);
+                    method: "POST",
+                    url: "data/data_harga.php",
+                    data: {
+                        sort1: sort1,
+                        sort2: sort2,
+                        cari2: cari2,
+                        cari1: cari1
+                    },
+                    success: function(hasil) {
+                        $('.tableku').html(hasil);
                     }
-                })
-            })
+                });
+            }
+            $('#cari1').keyup(function() {
+                var sort1 = $("#sort1").val();
+                var sort2 = $("#sort2").val();
+                var cari1 = $("#cari1").val();
+                var cari2 = $("#cari2").val();
+                load_data(sort1, sort2, cari1, cari2);
+            });
+            $('#cari2').change(function() {
+                var sort1 = $("#sort1").val();
+                var sort2 = $("#sort2").val();
+                var cari1 = $("#cari1").val();
+                var cari2 = $("#cari2").val();
+                load_data(sort1, sort2, cari1, cari2);
+            });
+            $('#sort1').change(function() {
+                var sort1 = $("#sort1").val();
+                var sort2 = $("#sort2").val();
+                var cari1 = $("#cari1").val();
+                var cari2 = $("#cari2").val();
+                load_data(sort1, sort2, cari1, cari2);
+            });
+            $('#sort2').change(function() {
+                var sort1 = $("#sort1").val();
+                var sort2 = $("#sort2").val();
+                var cari1 = $("#cari1").val();
+                var cari2 = $("#cari2").val();
+                load_data(sort1, sort2, cari1, cari2);
+            });
         });
     </script>
 </body>
