@@ -18,8 +18,12 @@
 
 <body>
     <?php
-    // mengambil konfigurasi koneksi
-    include "assets/shortcut/nav_out.php";
+    session_start();
+    if (isset($_SESSION['status']) and $_SESSION['status'] == "login") {
+        include "assets/shortcut/nav.php";
+    } else {
+        include "assets/shortcut/nav_out.php";
+    }
     include "assets/function/function.php";
     ?>
     <header class="d-flex align-content-center justify-content-center flex-column text-center" style="height: 100vh; color: black;">

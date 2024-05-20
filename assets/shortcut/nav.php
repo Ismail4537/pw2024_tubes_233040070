@@ -1,6 +1,6 @@
 <?php
 include "koneksi.php";
-session_start();
+// session_start();
 if ($_SESSION['status'] != "login") {
     header("location:../index.php?=belum_login");
 }
@@ -30,7 +30,7 @@ if ($tampil_user['gambar']) {
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Tabel
+                        Tabel Admin
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="http://localhost/pw2024_tubes_233040070/admin/harga.php">Tabel Harga</a></li>
@@ -46,6 +46,15 @@ if ($tampil_user['gambar']) {
                     ";
                         }
                         ?>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Tabel User
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="http://localhost/pw2024_tubes_233040070/harga.php">Tabel Harga</a></li>
+                        <li><a class="dropdown-item" href="http://localhost/pw2024_tubes_233040070/hardware.php">Tabel Hardware</a></li>
                     </ul>
                 </li>
             </ul>

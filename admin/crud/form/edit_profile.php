@@ -13,12 +13,14 @@
 
 <body>
     <?php
+    session_start();
     include "../../../assets/shortcut/nav.php";
+    include "../../../assets/function/function.php";
     ?>
     <section class="main" style="height:100%;">
         <?php
         $id = $_GET["id"];
-        $query = mysqli_query($koneksi, "SELECT * FROM user WHERE id='$id'");
+        $query = query("SELECT * FROM user WHERE id='$id'");
         while ($tampil = mysqli_fetch_array($query)) {
             if ($tampil_user['role'] == "admin") {
                 if ($tampil_user['username'] != $tampil['username']) {

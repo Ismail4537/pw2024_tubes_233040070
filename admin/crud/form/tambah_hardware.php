@@ -13,6 +13,7 @@
 
 <body>
     <?php
+    session_start();
     include "../../../assets/shortcut/nav.php";
     ?>
     <section class="main">

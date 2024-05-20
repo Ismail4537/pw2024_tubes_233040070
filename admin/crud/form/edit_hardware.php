@@ -13,13 +13,15 @@
 
 <body>
     <?php
+    session_start();
     include "../../../assets/shortcut/nav.php";
+    include "../../../assets/function/function.php";
     if (!$_GET["id"]) {
         header("location:../../harga.php?=id_kosong");
         return;
     }
     $id = $_GET["id"];
-    $query = mysqli_query($koneksi, "SELECT * FROM hardware WHERE id_hardware='$id'");
+    $query = query("SELECT * FROM hardware WHERE id_hardware='$id'");
     $tampil = mysqli_fetch_array($query)
     ?>
     <section class="main">

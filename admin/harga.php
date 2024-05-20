@@ -13,7 +13,7 @@
 
 <body>
     <?php
-    // mengambil konfigurasi koneksi
+    session_start();
     include "../assets/shortcut/nav.php";
     include "../assets/function/function.php";
     ?>

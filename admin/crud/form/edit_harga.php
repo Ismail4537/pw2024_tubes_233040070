@@ -13,13 +13,15 @@
 
 <body>
     <?php
+    session_start();
     include "../../../assets/shortcut/nav.php";
+    include "../../../assets/function/function.php";
     if (!$_GET["id"]) {
         header("location:../../harga.php?=id_kosong");
         return;
     }
     $id = $_GET["id"];
-    $query = mysqli_query($koneksi, "SELECT * FROM harga WHERE id_harga='$id'");
+    $query = query("SELECT * FROM harga WHERE id_harga='$id'");
     $tampil = mysqli_fetch_array($query)
     ?>
     <section class="main">
@@ -36,12 +38,12 @@
                 <div class="input-group flex-nowrap p-2">
                     <select name="id_hardware" class="form-select" aria-label="Default select example">
                         <?php
-                        $Qselect = mysqli_query($koneksi, "SELECT * FROM hardware WHERE id_hardware=" . $tampil['id_hardware'] . "");
+                        $Qselect = query("SELECT * FROM hardware WHERE id_hardware=" . $tampil['id_hardware'] . "");
                         $Tselect = mysqli_fetch_assoc($Qselect);
                         ?>
                         <option selected value="<?= $tampil['id_hardware'] ?>"><?= $Tselect['nama'] ?> - <?= $Tselect['kategori'] ?></option>
                         <?php
-                        $Qlist = mysqli_query($koneksi, "SELECT * FROM hardware");
+                        $Qlist = query("SELECT * FROM hardware");
                         while ($Tlist = mysqli_fetch_array($Qlist)) {
                         ?>
                             <option value="<?= $Tlist['id_hardware'] ?>"><?= $Tlist['nama'] ?> - <?= $Tlist['kategori'] ?></option>

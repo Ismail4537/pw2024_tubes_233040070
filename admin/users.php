@@ -9,16 +9,11 @@
     <link rel="stylesheet" href="../assets/style/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/style/index.css">
     <title>GaleryTek | Data User</title>
-    <!-- <style>
-        * {
-            border: 1px solid red;
-        }
-    </style> -->
 </head>
 
 <body>
     <?php
-    // mengambil konfigurasi koneksi
+    session_start();
     include "../assets/shortcut/nav.php";
     include "../assets/function/function.php";
     if ($tampil_user['role'] != "super admin") {
