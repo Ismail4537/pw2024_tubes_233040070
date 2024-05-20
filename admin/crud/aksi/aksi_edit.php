@@ -66,7 +66,7 @@ if (isset($_POST['hardware'])) {
     }
     $query = query("UPDATE `harga` SET `id_hardware` = '$id_hardware', `avg_price` = '$avg_price', `tanggal` = '$tanggal' WHERE `harga`.`id_harga` = $id");
     if ($query) {
-        header("location:../../harga.php#main");
+        header("location:../../index.php#main");
         unset($_POST['harga']);
     } else {
         session_start();

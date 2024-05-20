@@ -52,7 +52,7 @@ if (isset($_POST['hardware'])) {
     $query = query("INSERT INTO harga (`id_harga`, `id_hardware`, `avg_price`, `tanggal`) VALUES (NULL, '$id_hardware', '$avg_price', '$tanggal')");
     if ($query) {
         // jika berhasil maka akan diarahkan ke halaman harga.php
-        header("location:../../harga.php#main");
+        header("location:../../index.php#main");
         unset($_POST['harga']);
     } else {
         // jika gagal maka akan diarahkan ke halaman tambah.php

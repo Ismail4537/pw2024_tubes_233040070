@@ -33,7 +33,7 @@ if ($tampil_user['gambar']) {
                         Tabel Admin
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="http://localhost/pw2024_tubes_233040070/admin/harga.php">Tabel Harga</a></li>
+                        <li><a class="dropdown-item" href="http://localhost/pw2024_tubes_233040070/admin/index.php">Tabel Harga</a></li>
                         <li><a class="dropdown-item" href="http://localhost/pw2024_tubes_233040070/admin/hardware.php">Tabel Hardware</a></li>
                         <?php
                         if ($tampil_user['role'] == "super admin") {
@@ -53,7 +53,7 @@ if ($tampil_user['gambar']) {
                         Tabel User
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="http://localhost/pw2024_tubes_233040070/harga.php">Tabel Harga</a></li>
+                        <li><a class="dropdown-item" href="http://localhost/pw2024_tubes_233040070/index.php">Tabel Harga</a></li>
                         <li><a class="dropdown-item" href="http://localhost/pw2024_tubes_233040070/hardware.php">Tabel Hardware</a></li>
                     </ul>
                 </li>

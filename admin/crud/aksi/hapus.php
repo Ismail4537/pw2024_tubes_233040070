@@ -34,7 +34,7 @@ if (isset($_GET['id_hardware'])) {
     $query = query("DELETE FROM harga WHERE `id_harga`='$id';");
     if ($query) {
         // jika berhasil maka akan diarahkan ke halaman harga.php
-        header("location:../../harga.php#main");
+        header("location:../../index.php#main");
     } else {
         echo "Gagal menghapus data";
     }
