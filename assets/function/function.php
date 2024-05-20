@@ -20,10 +20,10 @@ function search_single($table, $sort1, $sort2, $cari1, $cari2)
     return $query;
 }
 
-function cek_gambar($gambar)
+function cek_gambar($gambar, $dir)
 {
-    if (file_exists("../recource/gambar/" . $gambar)) {
-        unlink("../recource/gambar/" . $gambar);
+    if (file_exists("../recource/" . $dir . "/" . $gambar)) {
+        unlink("../recource/" . $dir . "/" . $gambar);
     }
 }
 

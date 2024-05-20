@@ -113,7 +113,7 @@ if (isset($_POST['save'])) {
         $query = query("SELECT gambar FROM user WHERE id='$id';");
         $data = mysqli_fetch_array($query);
         $gambar = $data['gambar'];
-        cek_gambar($gambar);
+        cek_gambar($gambar, "gambar_profile");
         // tambah gambar baru & edit data
         $temp = $_FILES['gambaru']['tmp_name'];
         $gambaru = rand(0, 9999) . $_FILES['gambaru']['name'];

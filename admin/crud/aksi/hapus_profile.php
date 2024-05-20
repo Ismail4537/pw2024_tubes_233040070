@@ -28,7 +28,7 @@ if (isset($_GET['id'])) {
     $data = mysqli_fetch_array($query);
     $gambar = $data['gambar'];
     // menghapus gambar dari folder gambar_profile
-    cek_gambar($gambar);
+    cek_gambar($gambar, "gambar_profile");
     $query = query("DELETE FROM user WHERE `id`='$id';");
     // cek apakah user yang dihapus adalah user yang sedang login
     if ($data_user['username'] == $data_current['username']) {

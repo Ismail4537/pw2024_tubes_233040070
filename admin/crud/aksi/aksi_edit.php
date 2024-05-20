@@ -11,7 +11,7 @@ if (isset($_POST['hardware'])) {
         $query = query("SELECT gambar FROM hardware WHERE id_hardware='$id';");
         $data = mysqli_fetch_array($query);
         $gambar = $data['gambar'];
-        cek_gambar($gambar);
+        cek_gambar($gambar, "gambar");
         // tambah gambar baru & edit data
         $temp = $_FILES['gambaru']['tmp_name'];
         $gambaru = rand(0, 9999) . $_FILES['gambaru']['name'];

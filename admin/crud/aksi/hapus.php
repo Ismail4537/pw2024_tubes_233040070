@@ -17,7 +17,7 @@ if (isset($_GET['id_hardware'])) {
     $data = mysqli_fetch_array($query);
     $gambar = $data['gambar'];
     // menghapus gambar dari folder gambar
-    cek_gambar($gambar);
+    cek_gambar($gambar, "gambar");
     $query = query("DELETE FROM hardware WHERE `id_hardware`='$id';");
     if ($query) {
         // jika berhasil maka akan diarahkan ke halaman index.php
