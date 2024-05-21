@@ -2,7 +2,8 @@
 include "koneksi.php";
 // session_start();
 if ($_SESSION['status'] != "login") {
-    header("location:../index.php?=belum_login");
+    $_SESSION['gagal'] = "Anda harus login terlebih dahulu";
+    header("location:../index.php");
 }
 $user = $_SESSION['user'];
 $data_user = mysqli_query($koneksi, "SELECT * FROM user WHERE username='$user' or email='$user'");

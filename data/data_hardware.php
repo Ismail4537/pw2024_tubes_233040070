@@ -1,25 +1,7 @@
 <?php
 include "../assets/function/function.php";
 ?>
-<table class="text-center table table-bordered table-hover table-responsive table-sm tableku">
-    <thead class="table-success">
-        <tr>
-            <th class="align-content-center" width="2%">#</th>
-            <th class="align-content-center" width="20%">Gambar</th>
-            <th class="align-content-center" width="10%">Nama</th>
-            <th class="align-content-center" width="10%">Kategori</th>
-            <th class="align-content-center">Deskripsi</th>
-        </tr>
-    </thead>
-    <tfoot class="table-success">
-        <tr>
-            <th class="align-content-center">#</th>
-            <th class="align-content-center">Gambar</th>
-            <th class="align-content-center">Nama</th>
-            <th class="align-content-center">Kategori</th>
-            <th class="align-content-center">Deskripsi</th>
-        </tr>
-    </tfoot>
+<div class="tableku row">
     <?php
     $sort1 = "id_hardware";
     $sort2 = "ASC";
@@ -33,23 +15,23 @@ include "../assets/function/function.php";
     }
     $data = search_single("hardware", $sort1, $sort2, $cari1, $cari2);
     if (mysqli_num_rows($data) == 0) {
-        echo "<tr><td colspan='5'>Data tidak ditemukan</td></tr>";
+        echo "<div class='alert alert-danger m-auto mb-2' role='alert'>Belum ada Data, anda bisa register untuk menambahkan data atau info tentang hal-hal hardware terbaru</div>";
     }
     // inisialisasi variabel no untuk urutan data
     $no = 1;
     // menampilkan data dari database
     while ($tampil = mysqli_fetch_array($data)) {
     ?>
-        <tr>
-            <th class="align-content-center" scope="row"><?= $no++; ?></th>
-            <td class="align-content-center">
-                <img src="admin/crud/recource/gambar/<?= $tampil['gambar'] ?>" alt="<?= $tampil['gambar'] ?>">
-            </td>
-            <td class="align-content-center"><?= $tampil['nama']; ?></td>
-            <td class="align-content-center"><?= $tampil['kategori']; ?></td>
-            <td class="align-content-center"><?= $tampil['deskripsi']; ?></td>
-        </tr>
+        <div class="col-6 col-sm-4 mb-3 m-auto px-1" style="width: 50%;">
+            <div class="card m-auto">
+                <img class="card-img-top" style="height: 14rem;" src="admin/crud/recource/gambar/<?= $tampil['gambar'] ?>" alt="<?= $tampil['gambar'] ?>">
+                <div class="card-body">
+                    <h5 class="card-title"><b><?= $tampil['nama']; ?></b> | <?= $tampil['kategori'] ?></h5>
+                    <p class="card-text"><?= $tampil['deskripsi']; ?></p>
+                </div>
+            </div>
+        </div>
     <?php
     }
     ?>
-</table>
+</div>

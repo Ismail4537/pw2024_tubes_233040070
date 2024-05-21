@@ -2,12 +2,12 @@
 include "../../../assets/function/function.php";
 if (isset($_POST['hardware'])) {
     // mengambil data dari form
-    $nama = $_POST["nama"];
+    $nama = htmlspecialchars($_POST["nama"]);
     $kategori = $_POST["kategori"];
-    $deskripsi = $_POST["deskripsi"];
+    $deskripsi = htmlspecialchars($_POST["deskripsi"]);
     // mengambil data gambar seperti nama, ukuran, dan tipe
     $temp = $_FILES['gambar']['tmp_name'];
-    $gambar = rand(0, 9999) . $_FILES['gambar']['name'];
+    $gambar = rand(0, 9999) . htmlspecialchars($_FILES['gambar']['name']);
     $size = $_FILES['gambar']['size'];
     $type = $_FILES['gambar']['type'];
     // mengecek apakah gambar yang diupload sesuai dengan ketentuan

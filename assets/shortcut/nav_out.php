@@ -16,14 +16,11 @@ include "koneksi.php";
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#main">Main</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Tabel
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="http://localhost/pw2024_tubes_233040070/index.php">Tabel Harga</a></li>
-                        <li><a class="dropdown-item" href="http://localhost/pw2024_tubes_233040070/hardware.php">Tabel Hardware</a></li>
-                    </ul>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost/pw2024_tubes_233040070/index.php">Harga</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost/pw2024_tubes_233040070/hardware.php">Hardware</a>
                 </li>
             </ul>
             <div class="d-flex justify-content-evenly">

@@ -7,7 +7,7 @@
     <link rel="icon" href="assets/style/gambar/Tek.png">
     <link rel="stylesheet" href="assets/style/base.css">
     <link rel="stylesheet" href="assets/style/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/style/index.css">
+    <link rel="stylesheet" href="assets/style/user.css">
     <title>GaleryTek</title>
     <!-- <style>
         * {
@@ -19,6 +19,12 @@
 <body>
     <?php
     session_start();
+    if (isset($_SESSION['gagal'])) {
+        if (!isset($_SESSION['status']) and $_SESSION['status'] != "login") {
+            echo "<script>alert('" . $_SESSION['gagal'] . "')</script>";
+        }
+        unset($_SESSION['gagal']);
+    }
     if (isset($_SESSION['status']) and $_SESSION['status'] == "login") {
         include "assets/shortcut/nav.php";
     } else {
@@ -67,8 +73,8 @@
                     </div>
                 </div>
             </div>
-            <table class="text-center table table-bordered table-hover table-responsive table-sm tableku">
-            </table>
+            <div class="tableku">
+            </div>
         </div>
     </section>
     <?php

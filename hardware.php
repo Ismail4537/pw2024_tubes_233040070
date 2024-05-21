@@ -7,7 +7,7 @@
     <link rel="icon" href="assets/style/gambar/Tek.png">
     <link rel="stylesheet" href="assets/style/base.css">
     <link rel="stylesheet" href="assets/style/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/style/index.css">
+    <link rel="stylesheet" href="assets/style/user.css">
     <title>GaleryTek</title>
     <!-- <style>
         * {
@@ -72,7 +72,7 @@
                     </div>
                 </div>
             </div>
-            <table class="text-center table table-bordered table-hover table-responsive table-sm tableku">
+            <table class="tableku">
             </table>
         </div>
     </section>

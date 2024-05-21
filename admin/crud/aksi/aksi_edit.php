@@ -2,9 +2,9 @@
 include "../../../assets/function/function.php";
 if (isset($_POST['hardware'])) {
     $id = $_POST["id"];
-    $nama = $_POST["nama"];
+    $nama = htmlspecialchars($_POST["nama"]);
     $kategori = $_POST["kategori"];
-    $deskripsi = $_POST["deskripsi"];
+    $deskripsi = htmlspecialchars($_POST["deskripsi"]);
     // cek apakah user ingin mengubah gambar
     if (isset($_POST['upt'])) {
         // hapus gambar lama
@@ -14,7 +14,7 @@ if (isset($_POST['hardware'])) {
         cek_gambar($gambar, "gambar");
         // tambah gambar baru & edit data
         $temp = $_FILES['gambaru']['tmp_name'];
-        $gambaru = rand(0, 9999) . $_FILES['gambaru']['name'];
+        $gambaru = rand(0, 9999) . htmlspecialchars($_FILES['gambaru']['name']);
         $size = $_FILES['gambaru']['size'];
         $type = $_FILES['gambaru']['type'];
         if (($size <= 5000000) and ($type == 'image/jpeg' or $type == 'image/png')) {
