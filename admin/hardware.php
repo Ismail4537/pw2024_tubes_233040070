@@ -164,13 +164,10 @@
                 var page = $(this).attr("id");
                 load_data(sort1, sort2, cari1, cari2, page, limit);
             });
-            // membuat variabel baru untuk get
             var url = new URL(window.location.href);
-            // mengambil data dari get
             var nama = url.searchParams.get("nama");
-            // mengisi value dari input cari1
             $("#cari1").val(nama);
-            load_data("id_hardware", "ASC", nama, "nama");
+            load_data("id_hardware", "ASC", nama, "nama", 1, 10);
         });
     </script>
 </body>

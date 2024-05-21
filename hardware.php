@@ -9,11 +9,6 @@
     <link rel="stylesheet" href="assets/style/bootstrap.min.css">
     <link rel="stylesheet" href="assets/style/user.css">
     <title>GaleryTek</title>
-    <!-- <style>
-        * {
-            border: 1px solid red;
-        }
-    </style> -->
 </head>
 
 <body>
@@ -162,6 +157,10 @@
                 var page = $(this).attr("id");
                 load_data(sort1, sort2, cari1, cari2, page, limit);
             });
+            var url = new URL(window.location.href);
+            var nama = url.searchParams.get("nama");
+            $("#cari1").val(nama);
+            load_data("id_hardware", "ASC", nama, "nama", 1, 10);
         });
     </script>
 </body>
