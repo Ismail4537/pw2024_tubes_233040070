@@ -51,6 +51,14 @@
                             </select>
                             <label for="sort2" class="select">Urutan</label>
                         </div>
+                        <div class="d-flex me-2 form-floating">
+                            <select name="limit" id="limit" class="form-select select">
+                                <option selected value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                            </select>
+                            <label for="limit" class="select">Limit</label>
+                        </div>
                     </div>
                     <div class="input-group my-auto">
                         <select name="cari2" id="cari2" class="form-select mx-auto select" aria-label="Default select example">
@@ -74,8 +82,8 @@
                     <a href='crud/form/tambah_hardware.php' class='text-decoration-none btn btn-primary my-auto'>Tambah</a>
                 </div>
             </div>
-            <table class="text-center table table-bordered table-hover table-responsive table-sm tableku">
-            </table>
+            <div class="tableku">
+            </div>
         </div>
     </section>
     <?php
@@ -84,53 +92,77 @@
     <script>
         $(document).ready(function() {
             load_data();
-            // membuat fungsi load_data
-            function load_data(sort1, sort2, cari1, cari2) {
+
+            function load_data(sort1, sort2, cari1, cari2, page, limit) {
                 $.ajax({
-                    // mengirim data ke data_hardware.php dengan method post
                     method: "POST",
                     url: "crud/data_hardware.php",
                     data: {
+                        limit: limit,
+                        page: page,
                         sort1: sort1,
                         sort2: sort2,
                         cari2: cari2,
                         cari1: cari1
                     },
-                    // jika berhasil
                     success: function(hasil) {
                         $('.tableku').html(hasil);
                     }
                 });
             }
-            // membuat event ketika input cari1 di isi
             $('#cari1').keyup(function() {
                 var sort1 = $("#sort1").val();
                 var sort2 = $("#sort2").val();
                 var cari1 = $("#cari1").val();
                 var cari2 = $("#cari2").val();
-                load_data(sort1, sort2, cari1, cari2);
+                var limit = $("#limit").val();
+                var page = $(".halaman").attr("id");
+                load_data(sort1, sort2, cari1, cari2, page, limit);
             });
-            // membuat event ketika input cari2 di ubah
             $('#cari2').change(function() {
                 var sort1 = $("#sort1").val();
                 var sort2 = $("#sort2").val();
                 var cari1 = $("#cari1").val();
                 var cari2 = $("#cari2").val();
-                load_data(sort1, sort2, cari1, cari2);
+                var limit = $("#limit").val();
+                var page = $(".halaman").attr("id");
+                load_data(sort1, sort2, cari1, cari2, page, limit);
             });
             $('#sort1').change(function() {
                 var sort1 = $("#sort1").val();
                 var sort2 = $("#sort2").val();
                 var cari1 = $("#cari1").val();
                 var cari2 = $("#cari2").val();
-                load_data(sort1, sort2, cari1, cari2);
+                var limit = $("#limit").val();
+                var page = $(".halaman").attr("id");
+                load_data(sort1, sort2, cari1, cari2, page, limit);
             });
             $('#sort2').change(function() {
                 var sort1 = $("#sort1").val();
                 var sort2 = $("#sort2").val();
                 var cari1 = $("#cari1").val();
                 var cari2 = $("#cari2").val();
-                load_data(sort1, sort2, cari1, cari2);
+                var limit = $("#limit").val();
+                var page = $(".halaman").attr("id");
+                load_data(sort1, sort2, cari1, cari2, page, limit);
+            });
+            $('#limit').change(function() {
+                var sort1 = $("#sort1").val();
+                var sort2 = $("#sort2").val();
+                var cari1 = $("#cari1").val();
+                var cari2 = $("#cari2").val();
+                var limit = $("#limit").val();
+                var page = $(".halaman").attr("id");
+                load_data(sort1, sort2, cari1, cari2, page, limit);
+            });
+            $(document).on('click', '.halaman', function() {
+                var sort1 = $("#sort1").val();
+                var sort2 = $("#sort2").val();
+                var cari1 = $("#cari1").val();
+                var cari2 = $("#cari2").val();
+                var limit = $("#limit").val();
+                var page = $(this).attr("id");
+                load_data(sort1, sort2, cari1, cari2, page, limit);
             });
             // membuat variabel baru untuk get
             var url = new URL(window.location.href);
@@ -138,8 +170,7 @@
             var nama = url.searchParams.get("nama");
             // mengisi value dari input cari1
             $("#cari1").val(nama);
-            // menjalankan fungsi load_data
-            load_data("id_hardware", "DESC", nama, "nama");
+            load_data("id_hardware", "ASC", nama, "nama");
         });
     </script>
 </body>

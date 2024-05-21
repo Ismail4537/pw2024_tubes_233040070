@@ -58,6 +58,14 @@
                             </select>
                             <label for="sort2" class="select">Urutan</label>
                         </div>
+                        <div class="d-flex me-2 form-floating">
+                            <select name="limit" id="limit" class="form-select select" aria-label="Default select example">
+                                <option selected value="6">6</option>
+                                <option value="12">12</option>
+                                <option value="24">24</option>
+                            </select>
+                            <label for="limit" class="select">Limit</label>
+                        </div>
                     </div>
                     <div class="input-group my-auto">
                         <select name="cari2" id="cari2" class="form-select mx-auto select" aria-label="Default select example">
@@ -75,6 +83,7 @@
             </div>
             <div class="tableku">
             </div>
+            <!-- <button id="page">AAA</button> -->
         </div>
     </section>
     <?php
@@ -84,11 +93,13 @@
         $(document).ready(function() {
             load_data();
 
-            function load_data(sort1, sort2, cari1, cari2) {
+            function load_data(sort1, sort2, cari1, cari2, page, limit) {
                 $.ajax({
                     method: "POST",
                     url: "data/data_harga.php",
                     data: {
+                        limit: limit,
+                        page: page,
                         sort1: sort1,
                         sort2: sort2,
                         cari2: cari2,
@@ -104,28 +115,54 @@
                 var sort2 = $("#sort2").val();
                 var cari1 = $("#cari1").val();
                 var cari2 = $("#cari2").val();
-                load_data(sort1, sort2, cari1, cari2);
+                var limit = $("#limit").val();
+                var page = $(".halaman").attr("id");
+                load_data(sort1, sort2, cari1, cari2, page, limit);
             });
             $('#cari2').change(function() {
                 var sort1 = $("#sort1").val();
                 var sort2 = $("#sort2").val();
                 var cari1 = $("#cari1").val();
                 var cari2 = $("#cari2").val();
-                load_data(sort1, sort2, cari1, cari2);
+                var limit = $("#limit").val();
+                var page = $(".halaman").attr("id");
+                load_data(sort1, sort2, cari1, cari2, page, limit);
             });
             $('#sort1').change(function() {
                 var sort1 = $("#sort1").val();
                 var sort2 = $("#sort2").val();
                 var cari1 = $("#cari1").val();
                 var cari2 = $("#cari2").val();
-                load_data(sort1, sort2, cari1, cari2);
+                var limit = $("#limit").val();
+                var page = $(".halaman").attr("id");
+                load_data(sort1, sort2, cari1, cari2, page, limit);
             });
             $('#sort2').change(function() {
                 var sort1 = $("#sort1").val();
                 var sort2 = $("#sort2").val();
                 var cari1 = $("#cari1").val();
                 var cari2 = $("#cari2").val();
-                load_data(sort1, sort2, cari1, cari2);
+                var limit = $("#limit").val();
+                var page = $(".halaman").attr("id");
+                load_data(sort1, sort2, cari1, cari2, page, limit);
+            });
+            $('#limit').change(function() {
+                var sort1 = $("#sort1").val();
+                var sort2 = $("#sort2").val();
+                var cari1 = $("#cari1").val();
+                var cari2 = $("#cari2").val();
+                var limit = $("#limit").val();
+                var page = $(".halaman").attr("id");
+                load_data(sort1, sort2, cari1, cari2, page, limit);
+            });
+            $(document).on('click', '.halaman', function() {
+                var sort1 = $("#sort1").val();
+                var sort2 = $("#sort2").val();
+                var cari1 = $("#cari1").val();
+                var cari2 = $("#cari2").val();
+                var limit = $("#limit").val();
+                var page = $(this).attr("id");
+                load_data(sort1, sort2, cari1, cari2, page, limit);
             });
         });
     </script>

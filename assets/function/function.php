@@ -13,10 +13,9 @@ function query($input)
     $query = mysqli_query($koneksi, $input);
     return $query;
 }
-function search_single($table, $sort1, $sort2, $cari1, $cari2)
+function search_single($table, $sort1, $sort2, $cari1, $cari2, $limit_start, $limit)
 {
-    $koneksi = koneksi();
-    $query = query("SELECT * FROM " . $table . " WHERE " . $cari2 . " LIKE '%" . $cari1 . "%' ORDER BY " . $sort1 . " " . $sort2 . "");
+    $query = query("SELECT * FROM " . $table . " WHERE " . $cari2 . " LIKE '%" . $cari1 . "%' ORDER BY " . $sort1 . " " . $sort2 . " LIMIT " . $limit_start . "," . $limit . "");
     return $query;
 }
 
