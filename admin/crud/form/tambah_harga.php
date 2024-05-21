@@ -32,6 +32,9 @@
                         <option selected>Hardware</option>
                         <?php
                         $query = query("SELECT * FROM hardware");
+                        if (mysqli_num_rows($query) == 0) {
+                            echo "<option disabled>Data tidak ada</option>";
+                        }
                         while ($tampil = mysqli_fetch_array($query)) {
                         ?>
                             <option value="<?= $tampil['id_hardware'] ?>"><?= $tampil['nama'] ?> - <?= $tampil['kategori'] ?></option>

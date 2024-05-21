@@ -24,17 +24,17 @@ if (isset($_POST["save"])) {
     if ($apakah_valid == 1) {
         session_start();
         $_SESSION['gagal'] = "Password tidak valid";
-        header("location:../form/edit_profile.php?id=$id");
+        header("location:../form/register.php");
         return;
     } else if ($apakah_valid == 2) {
         session_start();
         $_SESSION['gagal'] = "Password kurang dari 10 kata";
-        header("location:../form/edit_profile.php?id=$id");
+        header("location:../form/register.php");
         return;
     } elseif ($apakah_valid == 3) {
         session_start();
         $_SESSION['gagal'] = "Password tidak sama";
-        header("location:../form/edit_profile.php?id=$id");
+        header("location:../form/register.php");
         return;
     }
     // enkripsi password

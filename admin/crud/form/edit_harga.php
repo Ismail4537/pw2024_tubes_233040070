@@ -44,6 +44,9 @@
                         <option selected value="<?= $tampil['id_hardware'] ?>"><?= $Tselect['nama'] ?> - <?= $Tselect['kategori'] ?></option>
                         <?php
                         $Qlist = query("SELECT * FROM hardware");
+                        if (mysqli_num_rows($Qlist) == 0) {
+                            echo "<option disabled>Data tidak ada</option>";
+                        }
                         while ($Tlist = mysqli_fetch_array($Qlist)) {
                         ?>
                             <option value="<?= $Tlist['id_hardware'] ?>"><?= $Tlist['nama'] ?> - <?= $Tlist['kategori'] ?></option>
