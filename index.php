@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="assets/style/base.css">
     <link rel="stylesheet" href="assets/style/bootstrap.min.css">
     <link rel="stylesheet" href="assets/style/user.css">
-    <title>GaleryTek</title>
+    <title>GaleryTek | Harga</title>
     <!-- <style>
         * {
             border: 1px solid red;
@@ -34,13 +34,13 @@
     ?>
     <header class="d-flex align-content-center justify-content-center flex-column text-center" style="height: 100vh; color: black;">
         <h4><img class="TEK" src="assets/style/gambar/Tek.png" alt="Tek" width="100px"></h4>
-        <h1>GaleryTek</h1>
+        <h1>GaleryTek | Harga</h1>
         <br>
-        <p class="mx-4">GaleryTek adalah sebuah galery teknologi dimana berfungsi sebagai platform untuk menampilkan berbagai jenis Hardware komputer dalam bentuk gambar dengan deskripsinya</p>
+        <p class="mx-4">GaleryTek adalah sebuah galery teknologi dimana berfungsi sebagai platform untuk merekomendasikan berbagai jenis Hardware komputer dalam bentuk gambar, harga, dan deskripsinya dengan tanggal rekapan harganya</p>
     </header>
     <section class="main d-flex flex-column p-1" id="main">
         <div class="data m-auto">
-            <div class="ultility d-flex m-3">
+            <div class="ultility d-flex my-3">
                 <div class="d-flex flex-column">
                     <div class="d-flex">
                         <div class="d-flex me-2 form-floating mb-2">

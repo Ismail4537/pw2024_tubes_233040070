@@ -23,7 +23,7 @@ include "koneksi.php";
                     <a class="nav-link" href="http://localhost/pw2024_tubes_233040070/hardware.php">Hardware</a>
                 </li>
             </ul>
-            <div class="d-flex justify-content-evenly">
+            <div class="d-flex justify-content-center">
                 <a href="login.php" class="d-flex btn btn-sm btn-primary justify-content-center me-2">
                     Login
                 </a>
@@ -31,4 +31,3 @@ include "koneksi.php";
         </div>
     </div>
 </nav>
-<div style="margin-bottom: 32px;">_</div>

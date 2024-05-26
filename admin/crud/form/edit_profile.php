@@ -33,7 +33,7 @@
                 $gambar = "Profile_picture.png";
             }
         ?>
-            <form action="../aksi/aksi_edit_profile.php" method="post" enctype="multipart/form-data" class="d-flex flex-column border rounded text-center mx-5">
+            <form action="../aksi/aksi_edit_profile.php" method="post" enctype="multipart/form-data" class="d-flex flex-column border rounded text-center" style="margin-top: 100px;">
                 <h2 class="title rounded-top text-white p-1">Form Edit Profile</h2>
                 <?php
                 if (isset($_SESSION['gagal'])) {

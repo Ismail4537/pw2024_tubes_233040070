@@ -42,8 +42,8 @@
     <section class="main mt-5" style="height: 100vh;">
         <div class="data d-flex flex-column border rounded text-center">
             <h2 class="rounded-top text-white p-1">Profil</h2>
-            <div class="container d-flex">
-                <div class="d-inline-flex flex-column text-center p-2 me-3">
+            <div class="container d-flex flex-column">
+                <div class="d-inline-flex flex-column text-center p-2">
                     <h4>Gambar Profil</h4>
                     <img class="mx-auto mb-2 mt-0 border rounded-circle" src="crud/recource/gambar_profile/<?= $gambar_profile ?>" alt="../assets/style/gambar/Profile_picture.png" width="200px" height="200px">
                 </div>
@@ -71,16 +71,16 @@
                         ";
                     }
                     ?>
-                    <div class="d-flex justify-content-between flex-row-reverse mb-2">
-                        <?php
-                        if ($tampil_user['username'] == $username or $tampil_user["role"] == "super admin") {
-                            echo "<a href='crud/form/edit_profile.php?id=" . $userId . "' class='btn btn-primary'>Edit Profil</a>";
-                        }
-                        if ($tampil_user['username'] == $username or $tampil_user["role"] == "super admin") {
-                            echo "<a href='crud/aksi/hapus_profile.php?id=" . $userId . "' class='btn btn-danger' onclick='return confirm(`Anda yakin mau menghapus akun ini ?`)'>Hapus Profil</a>";
-                        }
-                        ?>
-                    </div>
+                </div>
+                <div class="d-flex justify-content-between flex-row-reverse mb-2">
+                    <?php
+                    if ($tampil_user['username'] == $username or $tampil_user["role"] == "super admin") {
+                        echo "<a href='crud/form/edit_profile.php?id=" . $userId . "' class='btn btn-primary'>Edit Profil</a>";
+                    }
+                    if ($tampil_user['username'] == $username or $tampil_user["role"] == "super admin") {
+                        echo "<a href='crud/aksi/hapus_profile.php?id=" . $userId . "' class='btn btn-danger' onclick='return confirm(`Anda yakin mau menghapus akun ini ?`)'>Hapus Profil</a>";
+                    }
+                    ?>
                 </div>
             </div>
         </div>

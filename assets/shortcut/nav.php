@@ -51,7 +51,7 @@ if ($tampil_user['gambar']) {
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Tabel User
+                        Tabel Users
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="http://localhost/pw2024_tubes_233040070/index.php">Tabel Harga</a></li>
@@ -70,4 +70,3 @@ if ($tampil_user['gambar']) {
         </div>
     </div>
 </nav>
-<div style="margin-bottom: 32px;">_</div>

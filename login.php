@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="assets/style/gambar/Tek.png">
     <link rel="stylesheet" href="assets/style/base.css">
     <link rel="stylesheet" href="assets/style/form.css">
     <link rel="stylesheet" href="assets/style/bootstrap.min.css">
@@ -19,7 +20,7 @@
     include "assets/shortcut/nav_out.php";
     ?>
     <section class="main">
-        <form action="aksi/aksi_login.php" class="border rounded mx-5" method="post">
+        <form action="aksi/aksi_login.php" class="border rounded mb-0" style="margin-top: 100px;" method="post">
             <h2 class="title rounded-top text-center text-white pb-2">Form Login</h2>
             <?php
             if (isset($_SESSION['gagal'])) {

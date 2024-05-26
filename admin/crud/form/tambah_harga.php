@@ -18,7 +18,7 @@
     include "../../../assets/function/function.php";
     ?>
     <section class="main">
-        <form action="../aksi/aksi_tambah.php" method="post" class="d-flex flex-column border rounded text-center mx-5">
+        <form action="../aksi/aksi_tambah.php" method="post" class="d-flex flex-column border rounded text-center" style="margin-top: 100px;">
             <h2 class="title rounded-top text-white p-1">Form Tambah Harga</h2>
             <?php
             if (isset($_SESSION['gagal'])) {
