@@ -1,7 +1,7 @@
 <?php
 include "../assets/function/function.php";
 ?>
-<div class="tableku row">
+<div class="tableku row justify-content-center">
     <?php
     $sort1 = isset($_POST['sort1']) ? $_POST['sort1'] : "id_harga";
     $sort2 = isset($_POST['sort2']) ? $_POST['sort2'] : "ASC";
@@ -19,7 +19,7 @@ include "../assets/function/function.php";
     while ($tampil = mysqli_fetch_array($data)) {
         $date = date_create($tampil['tanggal']);
     ?>
-        <div class="col-6 col-sm-4 mb-3 m-auto px-1" style="width: 50%;">
+        <div class="col-6 col-sm-4 mb-3 m-auto px-1" style="width: 20rem;">
             <div class="card m-auto">
                 <img class="card-img-top" style="height: 14rem;" src="admin/crud/recource/gambar/<?= $tampil['gambar'] ?>" alt="<?= $tampil['gambar'] ?>">
                 <div class="card-body">

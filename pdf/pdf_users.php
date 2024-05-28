@@ -35,7 +35,7 @@ $html =
     <table>
         <tr>
             <td>
-                <h3>GaleryTek | Data Harga</h3>
+                <h3>GaleryTek | Data Users</h3>
                 <h2>' . date('d/m/Y') . '</h2>
             </td>
             <td style="text-align: right;">
