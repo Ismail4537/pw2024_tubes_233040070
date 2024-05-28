@@ -40,11 +40,16 @@ if (isset($_POST['hardware'])) {
     $id_hardware = $_POST["id_hardware"];
     $avg_price = $_POST["avg_price"];
     $tanggal = $_POST["tanggal"];
+    $link = "tambah_harga.php";
+    if (isset($_POST['copy'])) {
+        $link = "tambah_harga.php?copy=" . $_POST['copy'] . "";
+        unset($_POST['copy']);
+    }
     // mengecek apakah harga rata-rata pasaran sesuai
     if ($avg_price < 0 or $avg_price > 1000000000) {
         session_start();
         $_SESSION['gagal'] = "harga rata-rata pasaran tidak sesuai";
-        header("location:../form/tambah_harga.php");
+        header("location:../form/" . $link . "");
         unset($_POST['harga']);
         return;
     }
@@ -58,7 +63,7 @@ if (isset($_POST['hardware'])) {
         // jika gagal maka akan diarahkan ke halaman tambah.php
         session_start();
         $_SESSION['gagal'] = "Gagal menambahkan data";
-        header("location:../form/tambah_harga.php");
+        header("location:../form/" . $link . "");
         unset($_POST['harga']);
     }
 } else {

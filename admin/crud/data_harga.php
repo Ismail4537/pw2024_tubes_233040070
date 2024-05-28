@@ -49,6 +49,7 @@ include "../../assets/function/function.php";
                 <td class='align-content-center'>
                     <div class='action d-flex flex-column'>
                         <a href='crud/form/edit_harga.php?id=<?= $tampil['id_harga'] ?>' class='btn btn-success mb-1'>Edit</a>
+                        <a href='crud/form/tambah_harga.php?copy=<?= $tampil['id_harga'] ?>' class='btn btn-primary mb-1'>Copy</a>
                         <a href='crud/aksi/hapus.php?id_harga=<?= $tampil['id_harga'] ?>' class='btn btn-danger' onclick='return confirm(`Anda yakin mau menghapus item ini ?`)'>Hapus</a>
                     </div>
                 </td>
