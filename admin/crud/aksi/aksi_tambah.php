@@ -3,7 +3,14 @@ include "../../../assets/function/function.php";
 if (isset($_POST['hardware'])) {
     // mengambil data dari form
     $nama = htmlspecialchars($_POST["nama"]);
-    $kategori = $_POST["kategori"];
+    if ($_POST['kategori'] != "Kategori") {
+        $kategori = $_POST["kategori"];
+    } else {
+        session_start();
+        $_SESSION['gagal'] = "Harap pilih jenis kategori";
+        header("location:../form/tambah_hardware.php");
+        unset($_POST['hardware']);
+    }
     $deskripsi = htmlspecialchars($_POST["deskripsi"]);
     // mengambil data gambar seperti nama, ukuran, dan tipe
     $temp = $_FILES['gambar']['tmp_name'];
@@ -37,7 +44,14 @@ if (isset($_POST['hardware'])) {
     }
 } elseif (isset($_POST['harga'])) {
     // mengambil data dari form
-    $id_hardware = $_POST["id_hardware"];
+    if ($_POST["id_hardware"] != "Hardware") {
+        $id_hardware = $_POST["id_hardware"];
+    } else {
+        session_start();
+        $_SESSION['gagal'] = "Harap pilih Hardware";
+        header("location:../form/tambah_harga.php");
+        unset($_POST['harga']);
+    }
     $avg_price = $_POST["avg_price"];
     $tanggal = $_POST["tanggal"];
     $link = "tambah_harga.php";

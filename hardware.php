@@ -160,7 +160,7 @@
             var url = new URL(window.location.href);
             var nama = url.searchParams.get("nama");
             $("#cari1").val(nama);
-            load_data("id_hardware", "ASC", nama, "nama", 1, 10);
+            load_data("id_hardware", "ASC", nama, "nama", 1, 6);
         });
     </script>
 </body>
