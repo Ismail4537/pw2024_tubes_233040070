@@ -37,7 +37,6 @@ include "../../assets/function/function.php";
         }
         $no = $limit_start + 1;
         while ($tampil = mysqli_fetch_array($data)) {
-            $date = date_create($tampil['tanggal']);
         ?>
             <tr>
                 <th class="align-content-center" scope="row"><?= $no++; ?></th>
@@ -45,7 +44,7 @@ include "../../assets/function/function.php";
                 <td class="align-content-center">
                     <p class="mx-2">Rp,<?= number_format($tampil['avg_price'], 0, '', '.'); ?>,00</p>
                 </td>
-                <td class="align-content-center"><?= date_format($date, "Y/M/d l"); ?></td>
+                <td class="align-content-center"><?= $tampil['tanggal'] ?></td>
                 <td class='align-content-center'>
                     <div class='action d-flex flex-column'>
                         <a href='crud/form/edit_harga.php?id=<?= $tampil['id_harga'] ?>' class='btn btn-success mb-1'>Edit</a>

@@ -27,7 +27,7 @@ include "../assets/function/function.php";
                     <p class="card-text">Rp,<?= number_format($tampil['avg_price'], 0, '', '.'); ?>,00</p>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Tanggal di rekap : <br><?= date_format($date, "Y/M/d"); ?></li>
+                    <li class="list-group-item">Tanggal di rekap : <br><?= $tampil['tanggal'] ?></li>
                 </ul>
             </div>
         </div>
