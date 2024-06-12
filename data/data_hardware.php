@@ -18,12 +18,26 @@ include "../assets/function/function.php";
     $no = $limit_start + 1;
     while ($tampil = mysqli_fetch_array($data)) {
     ?>
-        <div class="col-6 col-sm-4 mb-3 m-auto px-1" style="width: 20rem;">
+        <div class="col-6 col-sm-4 mb-3 m-auto px-1 mt-0" style="width: 20rem;">
             <div class="card m-auto">
                 <img class="card-img-top" style="height: 14rem;" src="admin/crud/recource/gambar/<?= $tampil['gambar'] ?>" alt="<?= $tampil['gambar'] ?>">
                 <div class="card-body">
                     <h5 class="card-title"><b><?= $tampil['nama']; ?></b> | <?= $tampil['kategori'] ?></h5>
-                    <p class="card-text"><?= $tampil['deskripsi']; ?></p>
+                    <p>
+                        <a class="text-dark" data-bs-toggle="collapse" href="#Collapse<?= $tampil['id_hardware'] ?>">Read Decription</a>
+                    </p>
+                    <div class="row">
+                        <div class="col">
+                            <div class="collapse multi-collapse" id="Collapse<?= $tampil['id_hardware'] ?>">
+                                <div class="card card-body">
+                                    <?= $tampil['deskripsi']; ?>
+                                    <p>
+                                        <a class="text-dark" data-bs-toggle="collapse" href="#Collapse<?= $tampil['id_hardware'] ?>">Close</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

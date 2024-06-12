@@ -46,7 +46,23 @@ include "../../assets/function/function.php";
                 </td>
                 <td class="align-content-center"><?= $tampil['nama']; ?></td>
                 <td class="align-content-center"><?= $tampil['kategori']; ?></td>
-                <td class="align-content-center"><?= $tampil['deskripsi']; ?></td>
+                <td class="align-content-center">
+                    <p>
+                        <a class="text-dark" data-bs-toggle="collapse" href="#Collapse<?= $tampil['id_hardware'] ?>">Read More</a>
+                    </p>
+                    <div class="row">
+                        <div class="col">
+                            <div class="collapse multi-collapse" id="Collapse<?= $tampil['id_hardware'] ?>">
+                                <div>
+                                    <?= $tampil['deskripsi']; ?>
+                                    <p>
+                                        <a class="text-dark" data-bs-toggle="collapse" href="#Collapse<?= $tampil['id_hardware'] ?>">Close</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
                 <td class='align-content-center'>
                     <div class='action d-flex flex-column'>
                         <a href='crud/form/edit_hardware.php?id=<?= $tampil['id_hardware'] ?>' class='btn btn-success mb-1'>Edit</a>

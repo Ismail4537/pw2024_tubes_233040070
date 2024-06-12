@@ -60,17 +60,6 @@
                         <span class="input-group-text" id="addon-wrapping">Role</span>
                         <input type="text" value="<?= $role ?>" class="form-control" placeholder="Role" aria-label="Role" aria-describedby="addon-wrapping" readonly>
                     </div>
-                    <?php
-                    if ($tampil_user['role'] == "super admin") {
-                        echo
-                        "
-                        <div class='input-group mb-3'>
-                        <span class='input-group-text' id='addon-wrapping'>Password(MD5)</span>
-                        <input type='text' value='" . $password . "' class='form-control' placeholder='Password' aria-label='Password' aria-describedby='addon-wrapping' readonly>
-                    </div>
-                        ";
-                    }
-                    ?>
                 </div>
                 <div class="d-flex justify-content-between flex-row-reverse mb-2">
                     <?php
